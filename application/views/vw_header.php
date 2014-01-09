@@ -10,7 +10,7 @@
    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
    <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link href="../css/datac-style.css" rel="stylesheet" media="screen">
+   <link href="../css/datac-style.css" rel="stylesheet" media="screen">
  </head>
  <body>
  	<div class="navbar navbar-inverse navbar-fixed-top">

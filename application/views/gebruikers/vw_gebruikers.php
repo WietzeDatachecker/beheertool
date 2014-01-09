@@ -30,8 +30,7 @@
                   		echo "<tr>";
                   		}
                     $type =  $row->Type_check;
-                    if ($type=="BWT") { $color="green"; } else { $color="blue"; }
-                  	echo "<td><a href='gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'><i class='icon-pencil'></i></a>";
+                   	echo "<td><a href='gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'><i class='icon-pencil'></i></a>";
                   	echo "<td>".$row->UID."</td>";
                   	echo "<td class='bl'><a href='gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
                   	echo "<td>".$row->Gebruikersnaam."</td>";
@@ -54,11 +53,15 @@
                       {
                       echo "<tr>";
                       }
+                    $type =  $row->Type_check;
                     echo "<td><a href='../gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'><i class='icon-pencil'></i></a>";
                     echo "<td>".$row->UID."</td>";
                     echo "<td class='bl'><a href='../gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
                     echo "<td>".$row->Gebruikersnaam."</td>";
                     echo "<td>".$row->Saldo."</td>";
+                     echo "<td>"; 
+                     if ($type=="BWT") { } else { echo '<img src="../../img/nvmtoets.png"  class="nvmicon" alt=""/>';  }
+                    echo "</td>";
                     echo "</tr>";
                   }
           }
