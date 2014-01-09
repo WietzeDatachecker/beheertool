@@ -22,4 +22,6 @@ color:#fff;
 
 .bl a, .bl a:link,  .bl a:hover   { color: #000; }
 
-
+.nvmicon {
+	padding-top: 2px;
+}
