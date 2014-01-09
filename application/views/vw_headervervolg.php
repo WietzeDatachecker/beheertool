@@ -23,7 +23,7 @@
 				<i class="icon-cog"></i>
 			</a>
 			
-			<a class="brand">
+			<a href="home" class="brand">
 				DataChecker beheer <sup>1.8</sup>
 			</a>		
 			 <ul class="nav">

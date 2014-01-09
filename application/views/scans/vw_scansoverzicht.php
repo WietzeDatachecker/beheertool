@@ -3,8 +3,8 @@
 		if($zoekw == '') { 
 			  $query = $this->db->query('SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID ORDER BY DataCUploads.UID DESC LIMIT 100');
 							} else {
-
-			  $query = $this->db->query('SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID ORDER BY DataCUploads.UID DESC LIMIT 100');				
+									echo 'gezocht: '.$zoekw;
+			  $query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE DataCUploads.Achternaam='%$zoekw%'  ORDER BY DataCUploads.UID DESC ");				
 							}
 
 
@@ -18,7 +18,7 @@
 
 
 			<h2>Laatste 100 scans</h2>
-			<?PHP if($zoekw == '') { } else { echo 'gezocht: '.$zoekw; }   ?> 
+			
 			<div class="well">
 			          <table class="table">
 			              <thead>
