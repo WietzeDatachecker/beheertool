@@ -196,6 +196,29 @@
 
 					?>
          	<legend>Gebruikersgegevens ( <?php echo $bedrijfsnaam ?> )</legend>
+				<?PHP 
+				foreach ($invoiceinfo as $invoice ) {
+						               			
+						               		if($invoice->state == 'paid') { $ist="paid"; 
+						                        echo "<span style='color:green;'>Betaald</span>";
+						                      }
+						                      elseif ($invoice->state == 'late') { $ist="late";
+						                        echo "<span style='color:red;'>Te laat</span>";
+						                        
+						                      }
+						                      else{ $ist="open";
+						                        echo "<td>Openstaand</td>";
+						                      } 
+						                     
+						               	}
+
+				echo $ist;
+				?>
+
+
+
+
+
        			<div class="tabbable"> <!-- Only required for left/right tabs -->
 				  <ul class="nav nav-tabs">
 				    <li class="active"><a href="#tab1" data-toggle="tab">Gebruikersgegevens</a></li>
