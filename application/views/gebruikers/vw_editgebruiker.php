@@ -197,22 +197,17 @@
 					?>
          	<legend>Gebruikersgegevens ( <?php echo $bedrijfsnaam ?> )</legend>
 				<?PHP 
+				/**
+				$ist=""; 
 				foreach ($invoiceinfo as $invoice ) {
 						               			
-						               		if($invoice->state == 'paid') { $ist="paid"; 
-						                        echo "<span style='color:green;'>Betaald</span>";
-						                      }
-						                      elseif ($invoice->state == 'late') { $ist="late";
-						                        echo "<span style='color:red;'>Te laat</span>";
-						                        
-						                      }
-						                      else{ $ist="open";
-						                        echo "<td>Openstaand</td>";
-						                      } 
-						                     
+						               		if($invoice->state == 'late') {$ist="hold"; }
+						                     		                  
+						                  
 						               	}
 
 				echo $ist;
+				*/
 				?>
 
 

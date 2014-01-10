@@ -1,8 +1,13 @@
 <?php
-	$testurl = 'http://www.webrandit.nl/DataBeheer/';
+	$testurl = 'http://development.datachecker.nl/beheertool/';
 	$liveurl = '';
 	$test = true;
+
+	$currpage = $_SERVER['HTTP_REFERER']; 
+
+	$url=$testurl;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
  <head>
@@ -37,11 +42,11 @@
 				<i class="icon-cog"></i>
 			</a>
 			
-			<a class="brand">
-				DataChecker beheer <sup>1.8</sup>
+			<a href="<?PHP echo $url; ?>index.php/home" class="brand">
+				DataChecker beheer <sup>1.8.</sup>
 			</a>		
 			 <ul class="nav">
-			 	<li class=""><a href="../../../../../../index.php/home">Dashboard</a></li>
+			 	<li class=""><a href="<?PHP echo $url; ?>index.php/home">Dashboard  </a></li>
 			 	<li class="dropdown">
 			 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="icon-user wit"></i> 
@@ -50,9 +55,9 @@
 						</a>
 						
 						<ul class="dropdown-menu">
-							<li> <a href="../../../../../../index.php/gebruikers">Overzicht</a></li>
-							<li> <a href="../../../../../../index.php/gebruikers/gebruikersaanmaken">Aanmaken</a></li>
-							<li> <a href="../../../../../../index.php/gebruikers/gebruikersaanmakenwalter">Test gebruiker aanmaken</a></li>
+							<li> <a href="<?PHP echo $url; ?>index.php/gebruikers">Overzicht</a></li>
+							<li> <a href="<?PHP echo $url; ?>index.php/gebruikers/gebruikersaanmaken">Aanmaken</a></li>
+							<li> <a href="<?PHP echo $url; ?>index.php/gebruikers/gebruikersaanmakenwalter">Test gebruiker aanmaken</a></li>
 						</ul>
 			 	
 			 	</li>
@@ -64,9 +69,9 @@
 						</a>
 						
 						<ul class="dropdown-menu">
-							<li> <a href="../../../../../../index.php/scanoverzicht">Overzicht</a></li>
+							<li> <a href="<?PHP echo $url; ?>index.php/scanoverzicht">Overzicht</a></li>
 						</ul>
-			 		<li class=""><a href="../../../../../../index.php/rapportage"><i class="icon-eur wit"></i> Rapportages</span></a> </li>	
+			 		<li class=""><a href="<?PHP echo $url; ?>index.php/rapportage"><i class="icon-eur wit"></i> Rapportages</span></a> </li>	
 			 	</li>	
 			 </ul>
 			<div class="nav-collapse collapse">
@@ -81,7 +86,7 @@
 						</a>
 						
 						<ul class="dropdown-menu">
-							<li> <a href="../../../../../../index.php/home/logout">Uitloggen</a></li>
+							<li> <a href="<?PHP echo $url; ?>index.php/home/logout">Uitloggen</a></li>
 						</ul>
 						
 					</li>

@@ -19,7 +19,7 @@
       	<?php
 
         if($zoekw == '') { 
-  			$query = $this->db->query('SELECT * FROM DataCgebruikers ORDER BY UID ASC');
+  			$query = $this->db->query('SELECT * FROM DataCgebruikers ORDER BY UID DESC');
 
                   foreach ($query->result() as $row) {
                   	 if($row->Saldo <= 5 ) {

@@ -1,5 +1,5 @@
 <?php
-	$testurl = 'http://www.webrandit.nl/DataBeheer/';
+	$testurl = 'http://development.datachecker.nl/beheertool/';
 	$liveurl = '';
 	$test = true;
 ?>
@@ -37,7 +37,7 @@
 				<i class="icon-cog"></i>
 			</a>
 			
-			<a class="brand">
+			<a href="home" class="brand">
 				DataChecker beheer <sup>1.8</sup>
 			</a>		
 			 <ul class="nav">
