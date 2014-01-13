@@ -6,14 +6,12 @@
 			//Even de insertarr vullen
 			$insertdata = array(
                     'Gebruiker' => $this->input->post('opmerking_naam'),
-                    'GebruikersID' => $this->input->post('opmerking_userid'),
-                    'Opmerking' => $this->input->post('opmerking_opmerking'),
-                    'Actie' => $this->input->post('opmerking_actie'),
+                    'GebruikersID' => $this->input->post('opmerking_opmerking'),
                     'Datum' => date("y/m/d : H:i:s", time())
        		 );
 
 			$this->db->where('GebruikersID', $this->input->post('opmerking_userid'));
-			$this->db->insert('DataCOpmerkingen', $insertdata);
+			$this->db->update('DataCOpmerkingen', $insertdata);
 
 			//FF loggen
 

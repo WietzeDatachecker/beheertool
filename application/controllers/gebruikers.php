@@ -429,14 +429,16 @@ function insert_saldo() {
         {
 
         } else {
-          //Even de opmerking inserten
+         //Even de opmerking inserten
           $this->load->model('mod_opmerkingen');
           $retbool = $this->mod_opmerkingen->insertopmerking();
-
+          
           if($retbool == 'true') {
             //Insertgelukt en redirect
-            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('uid').'/false/false/false', 'refresh'); 
+            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('opmerking_userid').'/false/false/false', 'refresh');
           }
+
+           
         }
       }
   

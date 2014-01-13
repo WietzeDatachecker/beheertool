@@ -36,7 +36,8 @@
                   	echo "<td>".$row->Gebruikersnaam."</td>";
                   	echo "<td>".$row->Saldo."</td>";
                     echo "<td>"; 
-                     if ($type=="BWT") { } else { echo '<img src="../img/nvmtoets.png"  class="nvmicon" alt=""/>';  }
+                     if ($type=="BWT") { echo '<img src="../img/btoets.png"  class="nvmicon" alt=""/>'; } else { echo '<img src="../img/nvmtoets.png"  class="nvmicon" alt=""/>';  }
+                     
                     echo "</td>";
                   	echo "</tr>";
                   }

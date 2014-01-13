@@ -4,7 +4,7 @@
 	$qrylaatstescans = $this->db->query('SELECT * FROM DataCUploads WHERE UserID ='.$id.' ORDER BY UID DESC' );
 	$qrygegevens = $this->db->query('SELECT * FROM `DataCgebruikers` LEFT OUTER JOIN DataCGebruikersNaw ON DataCgebruikers.UID=DataCGebruikersNaw.GebruikersID WHERE DataCgebruikers.UID ='.$id );
 	$qrylogging = $this->db->query('SELECT * FROM `DataCLogging` WHERE GebruikersID ='.$id.' order by UID ASC');
-	$qryopmerkingen = $this->db->query('SELECT * FROM `DataCOpmerkingen` WHERE GebruikersID ='.$id.' order by UID ASC');
+	$qryopmerkingen = $this->db->query('SELECT * FROM `DataCOpmerkingen` WHERE GebruikersID ='.$id.' order by UID DESC');
 
 	foreach ($qrygegevens->result() as $row)
 	{
@@ -94,16 +94,16 @@
 	  <fieldset>
 	    <div class="control-group">
 	      <div class="controls">
-	        <input type="hidden" value="<?php echo $id; ?>" name="opmerking_userid" >
-	        <input type="hidden" value="<?php echo $naam; ?>" name="opmerking_naam" >
+	        <input type="text" value="<?php echo $id; ?>" name="opmerking_userid" >
+	        <input type="text" value="<?php echo $naam; ?>" name="opmerking_naam" >
 	      </div>
 	</div>
 	    
 	 <div class="control-group">
 		<label class="control-label" for="input01">Opmerking <span style="color:red;">*</span></label>
 	      <div class="controls">
-	        <textarea rows="5" class="input-xlarge" id="opmerking_opmerking" name="opmerking_opmerking"></textarea>
-	       
+	        <textarea rows="5" class="input-xlarge" id="opmerking_opmerking" name="opmerking_opmerking"></textarea><br>
+	        <input type="checkbox" name="opmerking_actie"  value="1"  > Markeer als actiepunt
 	      </div>
 	</div>
 </fieldset>
@@ -207,7 +207,7 @@
 
 				
 				// saldo check
-				if ($salo==0) { $scon="red"; }
+				if ($saldo==0) { $scon="red"; }
 				?>
 
 
@@ -467,6 +467,7 @@
 						                <th>Datum</th>
 						                <th>Door</th>
 						                <th>Opmerking</th>
+						                <th>Actie</th>
 						            </tr>
 						      </thead>
 						      <tbody>
@@ -477,6 +478,11 @@
 						                      echo "<td>".$row->Datum."</td>";
 						                      echo "<td>".$row->Gebruiker."</td>";
 						                      echo "<td>".$row->Opmerking."</td>";
+						                     
+						                      echo "<td>";
+
+						                      if($row->Actie == 1) {echo "<i class='icon-warning-sign icon-2x' style='color:red;'></i>" ;}
+						                      echo "</td>";
 						                      echo "</tr>"; 
 						                    } 
 						                ?>
@@ -498,3 +504,4 @@
        
         </div><!--/span-->
       </div><!--/row-->
+\
