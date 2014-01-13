@@ -1,10 +1,16 @@
 <?php
+
+if ($go==1) { $sqlgo="or Status<=2 "; 	} else { $sqlgo=""; }
+if ($af==1) { $sqlaf="or Status=3"; 	} else { $sqlaf=""; }
+if ($re==1) { $sqlre="or Status=999"; 	} else { $sqlre=""; }
+
+
 			  
 		if($zoekw == '') { 
-			  $query = $this->db->query('SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID ORDER BY DataCUploads.UID DESC LIMIT 100');
+			  $query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE UserID<1 $sqlgo $sqlaf $sqlre  ORDER BY DataCUploads.UID DESC LIMIT 100");
 							} else {
 									
-			  $query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE DataCUploads.Achternaam like '%".$zoekw."%' ORDER BY DataCUploads.UID DESC ");				
+			  $query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE DataCUploads.Achternaam like '%".$zoekw."%' and ( UserID<1 $sqlgo $sqlaf $sqlre )  ORDER BY DataCUploads.UID DESC ");				
 							}
 
 
@@ -76,19 +82,21 @@
 
 
         <div class="span4"><!-- span4 -->
-           <form class="" id="zoekform" method="post" action="<?php echo base_url();?>index.php/scans/scanzoeken">
+           <form class="" name="selectform" method="post" action="<?php echo base_url();?>index.php/scans/scanselect">
             <h2>Selecteer</h2>
             
          <div class="control-group"><!-- control-group -->
-            <label class="control-label" for="input01">Achternaam</label>
                 <div class="controls"><!-- controls -->
-                  <input type="text" class="input-xlarge" id="achternaam" name="achternaam">
+                  <input type="checkbox" name="go" onclick="document.selectform.submit();" id="checkbox" value="1" <?php if($go==1) { echo 'checked';} ?> ><span class="selectlabel">Goedgekeurd</span><br>
+                  <input type="checkbox" name="af" onclick="document.selectform.submit();" id="checkbox" value="1" <?php if($af==1) { echo 'checked';} ?> ><span class="selectlabel">Afgekeurd</span><br>
+                  <input type="checkbox" name="re" onclick="document.selectform.submit();" id="checkbox" value="1" <?php if($re==1) { echo 'checked';} ?> ><span class="selectlabel">Gereject</span>
+                  <input type="hidden" id="achternaam" name="achternaam" value="<? echo $zoekw; ?>">
                 </div><!-- /controls -->
           </div><!--  /control-group -->
           <div class="control-group"><!-- control-group -->
             <label class="control-label" for="input01"></label>
                 <div class="controls"><!-- controls -->
-                 <button type="submit" class="btn btn-primary" rel="tooltip" title="first tooltip">Zoek upload</button>
+                 
                  </form>
                 </div><!-- /controls -->
           
