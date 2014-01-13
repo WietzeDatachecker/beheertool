@@ -16,9 +16,7 @@ class scanoverzicht extends CI_Controller {
       $data['username'] = $session_data['username'];
       $data['id'] = $session_data['id'];
       $data['naam'] = $session_data['naam'];
-      $data['go'] = 1;
-      $data['af'] = 1;
-      $data['re'] = 1;
+      $data['go'] = 0;
       $this->load->view('vw_header', $data);
       $this->load->view('scans/vw_scansoverzicht', $data);
       $this->load->view('vw_footer', '');

@@ -197,17 +197,17 @@
 					?>
          	<legend>Gebruikersgegevens ( <?php echo $bedrijfsnaam ?> )</legend>
 				<?PHP 
-				/**
+				// factuur check
 				$ist=""; 
 				foreach ($invoiceinfo as $invoice ) {
 						               			
-						               		if($invoice->state == 'late') {$ist="hold"; }
-						                     		                  
-						                  
+						               		if($invoice->state == 'late') {$ist="hold"; $fcon="red";  }
+
 						               	}
 
-				echo $ist;
-				*/
+				
+				// saldo check
+				if ($salo==0) { $scon="red"; }
 				?>
 
 
@@ -216,10 +216,10 @@
 
        			<div class="tabbable"> <!-- Only required for left/right tabs -->
 				  <ul class="nav nav-tabs">
-				    <li class="active"><a href="#tab1" data-toggle="tab">Gebruikersgegevens</a></li>
+				    <li class="active"><a href="#tab1" data-toggle="tab" class="<?PHP echo $scon; ?>">Gebruikersgegevens</a></li>
 				    <li><a href="#tab2" data-toggle="tab">Overige gegevens</a></li>
 				    <li><a href="#tab6" data-toggle="tab">Gebruikers opmerkingen</a></li>
-				    <li><a href="#tab3" data-toggle="tab">Financieel</a></li>
+				    <li><a href="#tab3" data-toggle="tab" class="<?PHP echo $fcon; ?>">Financieel</a></li>
 				    <li><a href="#tab4" data-toggle="tab">Laatste uploads</a></li>
 				  <li><a href="#tab5" data-toggle="tab">Logging</a></li> 
 				  </ul>

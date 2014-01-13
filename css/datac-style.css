@@ -29,3 +29,6 @@ color:#fff;
 	line-height: 28px;
 	padding: 10px 5px; 
 }
+.red, .red a, .red a:link {
+	color: #F00;
+}

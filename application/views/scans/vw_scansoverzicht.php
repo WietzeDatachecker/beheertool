@@ -1,13 +1,15 @@
 <?php
 
-if ($go==1) { $sqlgo="or Status<=2 "; 	} else { $sqlgo=""; }
-if ($af==1) { $sqlaf="or Status=3"; 	} else { $sqlaf=""; }
-if ($re==1) { $sqlre="or Status=999"; 	} else { $sqlre=""; }
+	 if ($go==0) { $sqlgo="or Status>=1";} 
+else if ($go==1) { $sqlgo="or Status<=2";} 
+else if ($go==3) { $sqlgo="or Status=3";} 
+else if ($go==999) { $sqlgo="or Status=999";}
+else { $sqlgo=""; }
 
 
 			  
 		if($zoekw == '') { 
-			  $query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE UserID<1 $sqlgo $sqlaf $sqlre  ORDER BY DataCUploads.UID DESC LIMIT 100");
+			  $query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE UserID<1 $sqlgo  ORDER BY DataCUploads.UID DESC LIMIT 100");
 							} else {
 									
 			  $query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE DataCUploads.Achternaam like '%".$zoekw."%' and ( UserID<1 $sqlgo $sqlaf $sqlre )  ORDER BY DataCUploads.UID DESC ");				
@@ -87,9 +89,10 @@ if ($re==1) { $sqlre="or Status=999"; 	} else { $sqlre=""; }
             
          <div class="control-group"><!-- control-group -->
                 <div class="controls"><!-- controls -->
-                  <input type="checkbox" name="go" onclick="document.selectform.submit();" id="checkbox" value="1" <?php if($go==1) { echo 'checked';} ?> ><span class="selectlabel">Goedgekeurd</span><br>
-                  <input type="checkbox" name="af" onclick="document.selectform.submit();" id="checkbox" value="1" <?php if($af==1) { echo 'checked';} ?> ><span class="selectlabel">Afgekeurd</span><br>
-                  <input type="checkbox" name="re" onclick="document.selectform.submit();" id="checkbox" value="1" <?php if($re==1) { echo 'checked';} ?> ><span class="selectlabel">Gereject</span>
+                  <input type="radio" name="go" onclick="document.selectform.submit();" id="checkbox" value="0" <?php if($go==0) { echo 'checked';} ?> ><span class="selectlabel">Alles</span><br>
+                  <input type="radio" name="go" onclick="document.selectform.submit();" id="checkbox" value="1" <?php if($go==1) { echo 'checked';} ?> ><span class="selectlabel">Goedgekeurd</span><br>
+                  <input type="radio" name="go" onclick="document.selectform.submit();" id="checkbox" value="3" <?php if($go==3) { echo 'checked';} ?> ><span class="selectlabel">Afgekeurd</span><br>
+                  <input type="radio" name="go" onclick="document.selectform.submit();" id="checkbox" value="999" <?php if($go==999) { echo 'checked';} ?> ><span class="selectlabel">Gereject</span>
                   <input type="hidden" id="achternaam" name="achternaam" value="<? echo $zoekw; ?>">
                 </div><!-- /controls -->
           </div><!--  /control-group -->
