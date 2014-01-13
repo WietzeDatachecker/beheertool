@@ -28,6 +28,7 @@
 			              <thead>
 			                <tr>
 			                  <th></th>
+			                  <th>Nr.</th>
 			                  <th>Bedrijfsnaam</th>
 			                  <th>Naam</th>
 			                  <th>Scan datum</th>
@@ -36,6 +37,7 @@
 			              </thead>
 			              <tbody>
 			                <?php
+			                $x=0;
 			                  foreach ($query->result() as $row)
 			                    {
 			                      if($row->Status == 1 || $row->Status == 2) {
@@ -47,7 +49,9 @@
 			                      else{
 			                        echo "<tr class='info'>";
 			                      }
+			                      $x++;
 			                      echo "<td><a href='scanoverzicht/scandetails/".$row->IDCid."'><i class='icon-search'></i></a></td>";
+			                      echo "<td>".$x."</td>";
 			                      echo "<td class='bl'><a href='gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
 			                      echo "<td>".$row->Voornaam." ".$row->Achternaam."</td>";
 			                      echo "<td>".date('d-m-Y H:i:s', strtotime($row->Starttijd))."</td>";
@@ -71,27 +75,45 @@
 
 
 
-        <div class="span4">
+        <div class="span4"><!-- span4 -->
+           <form class="" id="zoekform" method="post" action="<?php echo base_url();?>index.php/scans/scanzoeken">
+            <h2>Selecteer</h2>
+            
+         <div class="control-group"><!-- control-group -->
+            <label class="control-label" for="input01">Achternaam</label>
+                <div class="controls"><!-- controls -->
+                  <input type="text" class="input-xlarge" id="achternaam" name="achternaam">
+                </div><!-- /controls -->
+          </div><!--  /control-group -->
+          <div class="control-group"><!-- control-group -->
+            <label class="control-label" for="input01"></label>
+                <div class="controls"><!-- controls -->
+                 <button type="submit" class="btn btn-primary" rel="tooltip" title="first tooltip">Zoek upload</button>
+                 </form>
+                </div><!-- /controls -->
+          
+          </div><!-- /control-group -->
+        </div><!--/span4-->
+
+        <div class="span4"><!-- span4 -->
            <form class="" id="zoekform" method="post" action="<?php echo base_url();?>index.php/scans/scanzoeken">
             <h2>Zoek een upload</h2>
             
-         <div class="control-group">
+         <div class="control-group"><!-- control-group -->
             <label class="control-label" for="input01">Achternaam</label>
-                <div class="controls">
+                <div class="controls"><!-- controls -->
                   <input type="text" class="input-xlarge" id="achternaam" name="achternaam">
-                </div>
-          </div>
-          <div class="control-group">
+                </div><!-- /controls -->
+          </div><!--  /control-group -->
+          <div class="control-group"><!-- control-group -->
             <label class="control-label" for="input01"></label>
-                <div class="controls">
+                <div class="controls"><!-- controls -->
                  <button type="submit" class="btn btn-primary" rel="tooltip" title="first tooltip">Zoek upload</button>
                  </form>
-                </div>
+                </div><!-- /controls -->
           
-          </div>
-        </div><!--/span-->
-
-
+          </div><!-- /control-group -->
+        </div><!--/span4-->
 
       </div><!--/row-->
 
