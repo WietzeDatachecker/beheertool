@@ -3,9 +3,7 @@
 	$liveurl = 'http://www.datachecker.nl/Databeheer/';
 	$test = false;
 
-	$currpage =  $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-    $currpage = str_replace("/index.php/rapportage", "", $currpage);
-    //echo $currpage;
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,10 +19,11 @@
 	} else {
 		echo '<title>DataChecker beheer</title>';
 	    echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
-	    echo '<link href="'.$liveurl.'css/bootstrap.min.css" rel="stylesheet" media="screen">';
-	    echo '<link href="'.$liveurl.'css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">';
-	    echo '<link rel="stylesheet" href="'.$liveurl.'css/font-awesome.min.css">';
-	    echo '<link href="'.$liveurl.'css/datac-style.css" rel="stylesheet" media="screen">';
+	    echo '<link href="../../../css/bootstrap.min.css" rel="stylesheet" media="screen">';
+	    echo '<link href="../../../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">';
+	    echo '<link rel="stylesheet" href="../../../css/font-awesome.min.css">';
+	    echo '<link href="../../../css/datac-style.css" rel="stylesheet" media="screen">';
+	    
 	}
 
 ?>
