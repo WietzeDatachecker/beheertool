@@ -57,12 +57,14 @@ class scanoverzicht extends CI_Controller {
  function scandetails($scanid){
    if($this->session->userdata('logged_in'))
     {
+
       $session_data = $this->session->userdata('logged_in');
       $data['username'] = $session_data['username'];
       $data['id'] = $session_data['id'];
       $data['naam'] = $session_data['naam'];
 
       $data['id'] = $scanid;
+      //print $session_data; 
 
       $result_id = $this->mod_scans->get_scandetails($scanid);
       $result_data = $this->mod_scans->get_datacheckdata($scanid);

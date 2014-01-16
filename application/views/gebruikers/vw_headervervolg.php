@@ -1,11 +1,11 @@
 <?php
 	$testurl = 'http://development.datachecker.nl/beheertool/';
-	$liveurl = '';
-	$test = true;
+	$liveurl = 'http://www.datachecker.nl/Databeheer/';
+	$test = false;
 
-	$currpage = $_SERVER['HTTP_REFERER']; 
+	//$currpage = $_SERVER['HTTP_REFERER']; 
 
-	$url=$testurl;
+	$url=$liveurl;
 ?>
 
 <!DOCTYPE html>

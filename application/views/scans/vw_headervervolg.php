@@ -1,7 +1,11 @@
 <?php
 	$testurl = 'http://development.datachecker.nl/beheertool/';
-	$liveurl = '';
-	$test = true;
+	$liveurl = 'http://www.datachecker.nl/Databeheer/';
+	$test = false;
+
+	$currpage =  $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+    $currpage = str_replace("/index.php/rapportage", "", $currpage);
+    //echo $currpage;
 ?>
 <!DOCTYPE html>
 <html lang="en">

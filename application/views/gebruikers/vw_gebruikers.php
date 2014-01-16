@@ -18,33 +18,9 @@
       <tbody>
       	<?php
 
-        if($zoekw == '') { 
-  			$query = $this->db->query('SELECT * FROM DataCgebruikers ORDER BY UID DESC');
-
-                  foreach ($query->result() as $row) {
-                  	 if($row->Saldo <= 5 ) {
-                        echo "<tr class='error'>";
-                      }
-                      else
-                      {
-                  		echo "<tr>";
-                  		}
-                    $type =  $row->Type_check;
-                   	echo "<td><a href='gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'><i class='icon-pencil'></i></a>";
-                  	echo "<td>".$row->UID."</td>";
-                  	echo "<td class='bl'><a href='gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
-                  	echo "<td>".$row->Gebruikersnaam."</td>";
-                  	echo "<td>".$row->Saldo."</td>";
-                    echo "<td>"; 
-                     if ($type=="BWT") { echo '<img src="../img/btoets.png"  class="nvmicon" alt=""/>'; } else { echo '<img src="../img/nvmtoets.png"  class="nvmicon" alt=""/>';  }
-                     
-                    echo "</td>";
-                  	echo "</tr>";
-                  }
-                    
-          } else {
-            //echo $zoekw;
-            $query = $this->db->query("SELECT * FROM `DataCgebruikers` WHERE Bedrijfsnaam like '%".$zoekw."%'");
+        if(isset($zoekw)) { 
+  			
+                 $query = $this->db->query("SELECT * FROM `DataCgebruikers` WHERE Bedrijfsnaam like '%".$zoekw."%'");
 
                   foreach ($query->result() as $row) {
                      if($row->Saldo <= 5 ) {
@@ -64,7 +40,32 @@
                      if ($type=="BWT") { } else { echo '<img src="../../img/nvmtoets.png"  class="nvmicon" alt=""/>';  }
                     echo "</td>";
                     echo "</tr>";
+                  }    
+          } else {
+            $query = $this->db->query('SELECT * FROM DataCgebruikers ORDER BY UID DESC');
+
+                  foreach ($query->result() as $row) {
+                     if($row->Saldo <= 5 ) {
+                        echo "<tr class='error'>";
+                      }
+                      else
+                      {
+                      echo "<tr>";
+                      }
+                    $type =  $row->Type_check;
+                    echo "<td><a href='gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'><i class='icon-pencil'></i></a>";
+                    echo "<td>".$row->UID."</td>";
+                    echo "<td class='bl'><a href='gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
+                    echo "<td>".$row->Gebruikersnaam."</td>";
+                    echo "<td>".$row->Saldo."</td>";
+                    echo "<td>"; 
+                     if ($type=="BWT") { echo '<img src="../img/btoets.png"  class="nvmicon" alt=""/>'; } else { echo '<img src="../img/nvmtoets.png"  class="nvmicon" alt=""/>';  }
+                     
+                    echo "</td>";
+                    echo "</tr>";
                   }
+            
+           
           }
         ?>
       </tbody>

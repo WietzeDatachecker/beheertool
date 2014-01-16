@@ -1,16 +1,15 @@
-<?php
-	$currpage =  $_SERVER['REQUEST_URI'];
-	echo str_replace("/DataBeheer/index.php/", "", $currpage);
-?>
+
 <!DOCTYPE html>
 <html lang="en">
- <head>
+<head>
    <title>DataChecker beheer</title>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
    <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
    <link rel="stylesheet" href="../css/font-awesome.min.css">
    <link href="../css/datac-style.css" rel="stylesheet" media="screen">
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		
  </head>
  <body>
  	<div class="navbar navbar-inverse navbar-fixed-top">

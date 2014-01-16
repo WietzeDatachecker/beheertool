@@ -32,3 +32,25 @@ color:#fff;
 .red, .red a, .red a:link {
 	color: #F00;
 }
+.jaarselect {
+	width: 97px;
+}
+.maandselect {
+	width: 120px;
+}
+.infoboxtop {
+	border: #CCC 1px solid;
+	padding: 10px 10px 30px ;
+	width: 43%;
+	float: left;
+	border-radius:5px;
+	margin: 10px 10px 50px;
+}
+.infoboxmain {
+	border: #CCC 1px solid;
+	padding: 10px 10px 30px ;
+	width: 100%;
+	float: left;
+	border-radius:5px;
+	margin: 10px 10px 50px;
+}

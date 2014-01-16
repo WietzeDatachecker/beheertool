@@ -35,7 +35,7 @@
 	}
 	
 
-
+	 
 
 
 ?>
@@ -94,8 +94,8 @@
 	  <fieldset>
 	    <div class="control-group">
 	      <div class="controls">
-	        <input type="text" value="<?php echo $id; ?>" name="opmerking_userid" >
-	        <input type="text" value="<?php echo $naam; ?>" name="opmerking_naam" >
+	        <input type="hidden" value="<?php echo $id; ?>" name="opmerking_userid" >
+	        <input type="hidden" value="<?php echo $naam; ?>" name="opmerking_naam" >
 	      </div>
 	</div>
 	    
@@ -103,6 +103,54 @@
 		<label class="control-label" for="input01">Opmerking <span style="color:red;">*</span></label>
 	      <div class="controls">
 	        <textarea rows="5" class="input-xlarge" id="opmerking_opmerking" name="opmerking_opmerking"></textarea><br>
+	        <input type="checkbox" name="opmerking_actie"  value="1"  > Markeer als actiepunt
+	      </div>
+	</div>
+</fieldset>
+	
+	  </div>
+  <div class="modal-footer">
+  	 <button class="btn btn-primary">Voeg opmerking toe</button>
+  	 </form>
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Annuleer</button>
+   
+  </div>
+</div>
+
+<!-- ModalEdit -->
+
+<div id="myModalEdit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">Bewerk opmerking</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal pull-left " id="registerHere" method="post" action="<?php echo base_url();?>index.php/gebruikers/insert_opmerking">
+	  <fieldset>
+	  	<?PHP
+foreach ($qryopmerkingen->result() as $row)
+						               {
+
+			if ($row->Actie==1)	{
+			$Eopm=$row->Opmerking;
+			$EID=$row->UID;
+
+		} 	               	
+
+
+}
+?>
+
+	    <div class="control-group">
+	      <div class="controls">
+	        <input type="text" value="<?php echo $EID; ?>" name="opmerking_userid" >
+	        <input type="text" value="<?php echo $naam; ?>" name="opmerking_naam" >
+	      </div>
+		</div>
+	    
+	 <div class="control-group">
+		<label class="control-label" for="input01">Opmerking <span style="color:red;">*</span></label>
+	      <div class="controls">
+	        <textarea rows="5" class="input-xlarge" id="opmerking_opmerking" name="opmerking_opmerking"><?PHP echo $Eopm; ?></textarea><br>
 	        <input type="checkbox" name="opmerking_actie"  value="1"  > Markeer als actiepunt
 	      </div>
 	</div>
@@ -177,6 +225,7 @@
         	
         </div><!--/span-->
          <div class="span10">
+
          		<?php if($saldosucces == 'true') {
          				echo "<div class='alert fade in alert-success'><button type='button' class='close' data-dismiss='alert'>X</button><strong>Saldo is met succes opgehoogd, en een factuur verzonden.</div>";
 
@@ -198,6 +247,7 @@
          	<legend>Gebruikersgegevens ( <?php echo $bedrijfsnaam ?> )</legend>
 				<?PHP 
 				// factuur check
+				$fcon=""; 
 				$ist=""; 
 				foreach ($invoiceinfo as $invoice ) {
 						               			
@@ -207,7 +257,16 @@
 
 				
 				// saldo check
+				$scon="1"; 	               	
 				if ($saldo==0) { $scon="red"; }
+				// actiepunt
+				$acon="";
+				 foreach ($qryopmerkingen->result() as $row)
+						                    {
+						                   
+						                      if($row->Actie == 1) { $acon="red"; }
+						                    
+						                    } 
 				?>
 
 
@@ -218,7 +277,7 @@
 				  <ul class="nav nav-tabs">
 				    <li class="active"><a href="#tab1" data-toggle="tab" class="<?PHP echo $scon; ?>">Gebruikersgegevens</a></li>
 				    <li><a href="#tab2" data-toggle="tab">Overige gegevens</a></li>
-				    <li><a href="#tab6" data-toggle="tab">Gebruikers opmerkingen</a></li>
+				    <li><a href="#tab6" data-toggle="tab" class="<?PHP echo $acon; ?>">Gebruikers opmerkingen</a></li>
 				    <li><a href="#tab3" data-toggle="tab" class="<?PHP echo $fcon; ?>">Financieel</a></li>
 				    <li><a href="#tab4" data-toggle="tab">Laatste uploads</a></li>
 				  <li><a href="#tab5" data-toggle="tab">Logging</a></li> 
@@ -467,7 +526,7 @@
 						                <th>Datum</th>
 						                <th>Door</th>
 						                <th>Opmerking</th>
-						                <th>Actie</th>
+						                <th></th>
 						            </tr>
 						      </thead>
 						      <tbody>
@@ -480,8 +539,8 @@
 						                      echo "<td>".$row->Opmerking."</td>";
 						                     
 						                      echo "<td>";
-
-						                      if($row->Actie == 1) {echo "<i class='icon-warning-sign icon-2x' style='color:red;'></i>" ;}
+						                      
+						                      if($row->Actie == 1) {echo "<a href='#myModalEdit' role='button' data-toggle='modal'><i class='icon-warning-sign icon-1x' style='color:red;'></i></a>" ;}
 						                      echo "</td>";
 						                      echo "</tr>"; 
 						                    } 
@@ -504,4 +563,3 @@
        
         </div><!--/span-->
       </div><!--/row-->
-\

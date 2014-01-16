@@ -2,6 +2,7 @@
 <?php
 	$this->load->helper('date');
 ?>
+
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>

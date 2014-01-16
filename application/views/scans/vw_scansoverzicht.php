@@ -7,12 +7,13 @@ else { $sqlgo=""; }
 
 
 			  
-		if($zoekw == '') { 
-			  $query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE UserID<1 $sqlgo  ORDER BY DataCUploads.UID DESC LIMIT 100");
-							} else {
-									
-			  $query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE DataCUploads.Achternaam like '%".$zoekw."%' and ( UserID<1 $sqlgo $sqlaf $sqlre )  ORDER BY DataCUploads.UID DESC ");				
-							}
+		if(isset($zoekw)) {
+				$query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE DataCUploads.Achternaam like '%".$zoekw."%' and ( UserID<1 $sqlgo )  ORDER BY DataCUploads.UID DESC ");				
+							
+			  } else {
+				$query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE UserID<1 $sqlgo  ORDER BY DataCUploads.UID DESC LIMIT 100");
+												
+			  }
 
 
 	?>
@@ -24,8 +25,8 @@ else { $sqlgo=""; }
 			
 			<?PHP
 
-        	if($zoekw == '') { echo "<h2>Laatste 100 scans</h2>"; } 
-        			   else  { echo "<h2>Upload gezocht op: </i>".$zoekw."</i></h2>";}
+        	if(isset($zoekw)) { echo "<h2>Upload gezocht op: </i>".$zoekw."</i></h2>"; } 
+        			   else   { echo "<h2>Laatste 100 scans</h2>";}
 
 			?>
 
@@ -92,7 +93,7 @@ else { $sqlgo=""; }
                   <input type="radio" name="go" onclick="document.selectform.submit();" id="checkbox" value="1" <?php if($go==1) { echo 'checked';} ?> ><span class="selectlabel">Goedgekeurd</span><br>
                   <input type="radio" name="go" onclick="document.selectform.submit();" id="checkbox" value="3" <?php if($go==3) { echo 'checked';} ?> ><span class="selectlabel">Afgekeurd</span><br>
                   <input type="radio" name="go" onclick="document.selectform.submit();" id="checkbox" value="999" <?php if($go==999) { echo 'checked';} ?> ><span class="selectlabel">Gereject</span>
-                  <input type="hidden" id="achternaam" name="achternaam" value="<? echo $zoekw; ?>">
+                  <input type="hidden" id="achternaam" name="achternaam" value="<? if(isset($zoekw)) {echo $zoekw; } ?>">
                 </div><!-- /controls -->
           </div><!--  /control-group -->
           <div class="control-group"><!-- control-group -->
