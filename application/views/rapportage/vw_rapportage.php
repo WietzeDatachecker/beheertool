@@ -36,9 +36,7 @@
         "2020"
     );
 
-    $currpage =  $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-    $currpage = str_replace("/index.php/rapportage", "", $currpage);
-    echo $currpage;
+    
 
     //$datum = date("j ") . $arraymaand[date("n") - 1] . date(" Y");
    
@@ -48,91 +46,74 @@
 	$datum = Date('d-m-Y');
  
     
-if (isset($kn)) {
-    if($kn>=1 ) { $sqlkn="AND UserID=$kn";  } else { $sqlkn=""; }
-} else { $sqlkn=""; }
-if (isset($tr)) {
-    if($tr>=1 ) { $sqltr="= $tr";  } else { $sqltr=">= 1"; }
-} else { $sqltr=">= 1"; }
-if (isset($jr)) {
-    if($jr>=1 ) { $sqljr="$jr";  } else { $sqljr="YEAR(NOW())"; }
-} else { $sqljr="YEAR(NOW())"; }
+if (isset($kn)) { if($kn>=1 ) { $sqlkn="AND UserID=$kn";  } else { $sqlkn=""; } } else { $sqlkn=""; }
+
+if (isset($tr)) { if($tr>=1 ) { $sqltr="= $tr";  } else { $sqltr=">= 1"; } } else { $sqltr=">= 1"; }
+
+if (isset($jr)) { if($jr>=1 ) { $sqljr="$jr";  } else { $sqljr="YEAR(NOW())"; } } else { $sqljr="YEAR(NOW())"; }
+
+if (isset($br)) { if($br>"" ) { $sqlbr="AND DataCgebruikers.Type_check='$br'";   } else { $sqlbr=""; } } else { $sqlbr=""; }
+    
+
+//echo $sqlbr;
+
 
     //jaar
     $qrytotaaljaar = $this->db->query("SELECT COUNT(UID) as totaal FROM  `DataCUploads`  WHERE YEAR( CAST( Starttijd AS DATE ) ) = YEAR( NOW( ) ) AND Voornaam <>  'yarno pieter' AND Voornaam <> 'yarno' AND Voornaam <> 'Walter David Alexander' $sqlkn ");
     $qryjaargoed   = $this->db->query("SELECT COUNT(UID) as totaal FROM  `DataCUploads`  WHERE YEAR( CAST( Starttijd AS DATE ) ) = YEAR( NOW( ) ) AND Voornaam <>  'yarno pieter' AND Voornaam <> 'yarno' AND Voornaam <> 'Walter David Alexander' AND Status in (1,2) $sqlkn");
     $qryjaarfout   = $this->db->query("SELECT COUNT(UID) as totaal FROM  `DataCUploads`  WHERE YEAR( CAST( Starttijd AS DATE ) ) = YEAR( NOW( ) ) AND Voornaam <>  'yarno pieter' AND Voornaam <> 'yarno' AND Voornaam <> 'Walter David Alexander' AND Status in (3) $sqlkn");
     $qryjaarreje   = $this->db->query("SELECT COUNT(UID) as totaal FROM  `DataCUploads`  WHERE YEAR( CAST( Starttijd AS DATE ) ) = YEAR( NOW( ) ) AND Voornaam <>  'yarno pieter' AND Voornaam <> 'yarno' AND Voornaam <> 'Walter David Alexander' AND Status in (999) $sqlkn");
-    //Maand
-	$qrytotaalmaand = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr $sqlkn");
-    $qrymaandgoed   = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status IN (1,2) $sqlkn ORDER BY UID ASC");
-    $qrymaandfout   = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status IN (3) $sqlkn ORDER BY UID ASC");
-    $qrymaandreje   = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status IN (999) $sqlkn ORDER BY UID ASC");
+
     //dag
     $qrytotaaldag   = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE Starttijd > '".$vandaag." 00:00:00' AND Starttijd < '".$morgen." 00:00:00' ORDER BY UID ASC");
     $qrydaggoed     = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE Starttijd > '".$vandaag." 00:00:00' AND Starttijd < '".$morgen." 00:00:00' AND Status IN (1,2)  ORDER BY UID ASC");
     $qrydagfout     = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE Starttijd > '".$vandaag." 00:00:00' AND Starttijd < '".$morgen." 00:00:00' AND Status IN (3)  ORDER BY UID ASC");
     $qrydagreje     = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE Starttijd > '".$vandaag." 00:00:00' AND Starttijd < '".$morgen." 00:00:00' AND Status IN (999)  ORDER BY UID ASC");
+    
+
+    //variabel
+    $qrytotaalmaand = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr $sqlkn ");
+    $qrymaandgoed   = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status IN (1,2) $sqlkn ORDER BY UID ASC");
+    $qrymaandfout   = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status IN (3) $sqlkn ORDER BY UID ASC");
+    $qrymaandreje   = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status IN (999) $sqlkn ORDER BY UID ASC");
+    $qrymaandbeha   = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status IN (4000) $sqlkn ORDER BY UID ASC");
+    
+
     //klanten ophalen
     $qryklanten = $this->db->query("SELECT UID, Bedrijfsnaam FROM  `DataCgebruikers` ORDER BY Bedrijfsnaam ASC ");
     // NVM or BWT
-  //$qrytoets = $this->db->query("SELECT COUNT(UID) as totaal, DataCgebruikers.Type_check FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr $sqlkn ");
-    $qrynvm = $this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE DataCgebruikers.Type_check = 'NVM' ");
-    $qrybwt = $this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE DataCgebruikers.Type_check = 'BWT' "); 
-    
-    
+
+    $qrynvm = $this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND DataCgebruikers.Type_check = 'NVM'  ");
+    $qrybwt = $this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND DataCgebruikers.Type_check = 'BWT'  "); 
+    $qryppc = $this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND DataCgebruikers.Type_check = 'PPC'  "); 
+    $qrynvb = $this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND DataCgebruikers.Type_check = 'NVMB' "); 
+
+
+
+    // variabel  soort
+    $qrytotaalbron=$this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr $sqlbr ");
+    $qrybrongoed = $this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status IN (1,2) $sqlbr  ");
+    $qrybronfout = $this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status IN (3)  $sqlbr  ");
+    $qrybronreje = $this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status IN (999)  $sqlbr  ");
+    $qrybronbeha = $this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) $sqltr AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status IN (4000) $sqlbr  ");
 
 
 
     foreach ($qrymaandgoed->result() as $row) {$htg=$row->totaal;  }                     
     foreach ($qrymaandfout->result() as $row) {$hta=$row->totaal;  } 
-    foreach ($qrymaandreje->result() as $row) {$htr=$row->totaal;  }   
+    foreach ($qrymaandreje->result() as $row) {$htr=$row->totaal;  } 
+    foreach ($qrymaandbeha->result() as $row) {$hbh=$row->totaal;  }    
 
-    foreach ($qrynvm->result() as $row) {$hnvm=$row->totaal;  }
-    foreach ($qrybwt->result() as $row) {$hbwt=$row->totaal;  }        
+    foreach ($qrybrongoed->result() as $row) {$btg=$row->totaal;  }                     
+    foreach ($qrybronfout->result() as $row) {$bta=$row->totaal;  } 
+    foreach ($qrybronreje->result() as $row) {$btr=$row->totaal;  } 
+    foreach ($qrybronbeha->result() as $row) {$bbh=$row->totaal;  }    
+
+
+    
     
 ?>
-<script type="text/javascript">
-        $(function () {
-            $('#output').highcharts({
-                chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: null,
-                    plotShadow: false
-                },
-                title: {
-                    text: 'Rapportage: '
-                },
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: true,
-                            color: '#000000',
-                            connectorColor: '#000000',
-                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                        }
-                    }
-                },
-                series: [{
-                    type: 'pie',
-                    name: '',
-                    data: [
-                        ['NVMWonen',   <?PHP echo $hnvm; ?>],
-                        ['BewustWonen',        <?PHP echo $hbwt; ?>],
-                        
-                       
-                    ]
-                }]
-            });
-        });
-            
 
-</script>
 
 <div class="container">
       <div class="row">
@@ -259,7 +240,262 @@ if (isset($jr)) {
   </div> <!--- /infobox -->
 
       <br/>
-      <div class="infoboxmain"> <!-- boxberekening -->
+      
+        </div><!--/span-->
+        <div class="span5">
+        <h3>Klant rapportage</h3>
+        <?php 
+        
+               // echo "Klant is ".$kn." type rapport is ".$tr." Bron:".$br;
+          
+        ?>
+         <form class="" id="zoekform" method="post" action="<?php echo base_url();?>index.php/rapportage/klantrapportage">
+        <table>
+            <tr>
+                <td width="165px">Selecteer een klant</td>
+                <td>
+                    <?php
+                    $l1=(empty($kn) ? '' : $kn);
+                    ?>
+                    <select name="klantenbox" >
+                      <option value="">- Alles -</option>
+                     
+                      <?php
+                        
+                        foreach ($qryklanten->result() as $row)
+                            {
+                               echo "<option value='".$row->UID."'  ".($l1 == $row->UID ? ' selected' : '')." >".$row->Bedrijfsnaam." (".$row->UID.")</option>";
+                            }
+                        ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td width="165px">Rapportage periode</td>
+                <td>
+                    <?php $l2=(empty($tr) ? '' : $tr); ?>
+                     <select name="typerap" class="maandselect">
+                     <option value="0">- Alles -</option> 
+                    <?php
+                        
+                        foreach ($arraymaand as $value => $key) 
+                            {
+                               echo "<option value='".$key."'  ".($l2 == $key ? ' selected' : '')." >".$value." </option>";
+                            }
+                    ?>
+                    </select>
+                     <?php $l4=(empty($jr) ? '' : $jr); ?>
+                     <select name="jaarrap" class="jaarselect">
+                     <option value="">- Alles -</option>
+                    <?php
+                        
+                        foreach ($arrayjaar as $value) 
+                            {
+                               echo "<option value='".$value."'  ".($l4 == $value ? ' selected' : '')." >".$value." </option>";
+                            }
+                    ?>
+                    </select>
+                </td>
+            </tr>
+           
+            <tr>
+                <td width="165px">Bron</td>
+                <td>
+                    <?php $l3=(empty($br) ? '' : $br); ?>
+                    <select name="bronrap">
+                      <option value="">- Kies -</option>
+                      <option value="NVM" <? echo ($l3 == "NVM" ? ' selected' : '') ?>>NVMwoontoets </option>
+                      <option value="BWT" <? echo ($l3 == "BWT" ? ' selected' : '') ?>>Bewusttoetsen </option>
+                      <option value="PPC" <? echo ($l3 == "PPC" ? ' selected' : '') ?>>PayperCheck </option>
+                      <option value="NVMB" <? echo ($l3 == "NVMBN" ? ' selected' : '') ?>>Businesstoets </option>
+                    </select> 
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button class="btn btn-primary">Genereer rapport</button></td>
+            </tr>
+        </table>
+        </form>
+        </div><!--/span-->
+      </div><!--/row-->
+
+<?PHP 
+if($br>"") {
+?>
+<div class="infoboxmain"> <!-- boxberekening -->
+    <script type="text/javascript">
+        $(function () {
+            $('#output').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Rapportage:  <?PHP echo $br ; ?>'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '',
+                    data: [
+                        ['Goedgekeurd',   <?PHP echo $btg; ?>],
+                        ['Afgekeurd',        <?PHP echo $bta; ?>],
+                        ['Reject',        <?PHP echo $btr; ?>],
+                        ['Onderweg',        <?PHP echo $bbh; ?>],
+                    ]
+                }]
+            });
+        });
+            
+
+</script>
+      <div class="infoboxin">
+      <h3>Totalen van: 
+            <?php
+             echo $br.' '; 
+                setlocale(LC_TIME, 'NL_nl'); 
+                $st_date= strftime('%B',time()); 
+
+                foreach ($arraymaand as $value => $key) 
+                            {
+                               //echo "<option value='".$key."'  ".($l2 == $key ? ' selected' : '')." >".$value." </option>";
+                               if (isset($tr)) {if ($tr==$key) { $DV=$value; } }
+                            }   
+                            
+                            if (isset($DV)) { echo $DV; } else { if(isset($jr)) {echo $jr;} }
+            ?> 
+        </h3>
+        <table>
+            <tr>
+                <td width="190px"> Totaal aantal checks:</td>
+                <td>
+                     <?php
+                        
+                        foreach ($qrytotaalbron->result() as $row)
+                            {
+                                echo $row->totaal;
+                            }
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Aantal goedgekeurd:</td>
+                <td>
+                     <?php
+                        
+                        foreach ($qrybrongoed->result() as $row)
+                            {
+                                echo $row->totaal;
+                            }
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Aantal afgekeurd:</td>
+                <td>
+                     <?php
+                        
+                        foreach ($qrybronfout->result() as $row)
+                            {
+                                echo $row->totaal;
+                            }
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Aantal reject:</td>
+                <td>
+                     <?php
+                        
+                        foreach ($qrybronreje->result() as $row)
+                            {
+                                echo $row->totaal;
+                            }
+                    ?>
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>Aantal in behandeling:</td>
+                <td>
+                     <?php
+                        
+                        foreach ($qrybronbeha->result() as $row)
+                            {
+                                echo $row->totaal;
+                            }
+                    ?>
+
+
+                </td>
+            </tr>
+      </table>
+
+        </div> <!-- box infoin -->
+        
+
+<?PHP } else {?> 
+
+<div class="infoboxmain"> <!-- boxberekening -->
+    <script type="text/javascript">
+        $(function () {
+            $('#output').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Rapportage: '
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '',
+                    data: [
+                        ['Goedgekeurd',   <?PHP echo $htg; ?>],
+                        ['Afgekeurd',        <?PHP echo $hta; ?>],
+                        ['Reject',        <?PHP echo $htr; ?>],
+                        ['Onderweg',        <?PHP echo $hbh; ?>],
+                    ]
+                }]
+            });
+        });
+            
+
+</script>
+      <div class="infoboxin">
       <h3>Totalen van: 
             <?php
                 setlocale(LC_TIME, 'NL_nl'); 
@@ -325,92 +561,31 @@ if (isset($jr)) {
 
                 </td>
             </tr>
+            <tr>
+                <td>Aantal in behandeling:</td>
+                <td>
+                     <?php
+                        
+                        foreach ($qrymaandbeha->result() as $row)
+                            {
+                                echo $row->totaal;
+                            }
+                    ?>
+
+
+                </td>
+            </tr>
       </table>
 
-        
-       
+        </div> <!-- box infoin -->
+        <?PHP } ?> 
+
+  
         <script src="../../js/highcharts.js"></script>
         <script src="../js/highcharts.js"></script>
         <script src="../../js/modules/exporting.js"></script>
         <script src="../js/modules/exporting.js"></script>
 
-        <div id="output" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <div id="output" style="max-width: 500px; height: 400px; margin: 0 auto"></div>
       <br/>
      </div><!-- / box berekening -->
-        </div><!--/span-->
-        <div class="span5">
-        <h3>Klant rapportage</h3>
-        <?php 
-        
-               // echo "Klant is ".$kn." type rapport is ".$tr." Bron:".$br;
-          
-        ?>
-         <form class="" id="zoekform" method="post" action="<?php echo base_url();?>index.php/rapportage/klantrapportage">
-        <table>
-            <tr>
-                <td width="165px">Selecteer een klant</td>
-                <td>
-                    <?php
-                    $l1=(empty($kn) ? '' : $kn);
-                    ?>
-                    <select name="klantenbox" >
-                      <option value="">- Alles -</option>
-                     
-                      <?php
-                        
-                        foreach ($qryklanten->result() as $row)
-                            {
-                               echo "<option value='".$row->UID."'  ".($l1 == $row->UID ? ' selected' : '')." >".$row->Bedrijfsnaam." (".$row->UID.")</option>";
-                            }
-                        ?>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td width="165px">Rapportage periode</td>
-                <td>
-                    <?php $l2=(empty($tr) ? '' : $tr); ?>
-                     <select name="typerap" class="maandselect">
-                     <option value="0">- Alles -</option> 
-                    <?php
-                        
-                        foreach ($arraymaand as $value => $key) 
-                            {
-                               echo "<option value='".$key."'  ".($l2 == $key ? ' selected' : '')." >".$value." </option>";
-                            }
-                    ?>
-                    </select>
-                     <?php $l4=(empty($jr) ? '' : $jr); ?>
-                     <select name="jaarrap" class="jaarselect">
-                     <option value="">- Alles -</option>
-                    <?php
-                        
-                        foreach ($arrayjaar as $value) 
-                            {
-                               echo "<option value='".$value."'  ".($l4 == $value ? ' selected' : '')." >".$value." </option>";
-                            }
-                    ?>
-                    </select>
-                </td>
-            </tr>
-           
-            <tr>
-                <td width="165px">Bron</td>
-                <td>
-                    <?php $l3=(empty($br) ? '' : $br); ?>
-                    <select name="bronrap">
-                      <option value="0">- Kies -</option>
-                      <option value="1" <? echo ($l3 == 1 ? ' selected' : '') ?>>NVMwoontoets </option>
-                      <option value="2" <? echo ($l3 == 2 ? ' selected' : '') ?>>Bewusttoetsen </option>
-                      <option value="3" <? echo ($l3 == 3 ? ' selected' : '') ?>>*PayperCheck </option>
-                    </select> 
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><button class="btn btn-primary">Genereer rapport</button></td>
-            </tr>
-        </table>
-        </form>
-        </div><!--/span-->
-      </div><!--/row-->

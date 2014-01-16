@@ -46,11 +46,18 @@ color:#fff;
 	border-radius:5px;
 	margin: 10px 10px 50px;
 }
+.infoboxin {
+	padding: 10px 10px 30px ;
+	width: 30%;
+	float: left;
+	border-radius:5px;
+	margin: 10px 10px 50px;
+}
 .infoboxmain {
 	border: #CCC 1px solid;
 	padding: 10px 10px 30px ;
 	width: 100%;
 	float: left;
 	border-radius:5px;
-	margin: 10px 10px 50px;
+	margin: 10px 50px 50px 10px;
 }

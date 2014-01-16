@@ -58,9 +58,9 @@ else { $sqlgo=""; }
 			                        echo "<tr class='info'>";
 			                      }
 			                      $x++;
-			                      echo "<td><a href='scanoverzicht/scandetails/".$row->IDCid."'><i class='icon-search'></i></a></td>";
+			                      echo "<td><a href='../scanoverzicht/scandetails/".$row->IDCid."'><i class='icon-search'></i></a></td>";
 			                      echo "<td>".$x."</td>";
-			                      echo "<td class='bl'><a href='gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
+			                      echo "<td class='bl'><a href='../gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
 			                      echo "<td>".$row->Voornaam." ".$row->Achternaam."</td>";
 			                      echo "<td>".date('d-m-Y H:i:s', strtotime($row->Starttijd))."</td>";
 			                       if($row->Status == 1 || $row->Status == 2) {

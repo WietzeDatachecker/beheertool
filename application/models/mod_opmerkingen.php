@@ -12,7 +12,7 @@
                     'Datum' => date("y/m/d : H:i:s", time())
        		 );
 
-			$this->db->where('GebruikersID', $this->input->post('opmerking_userid'));
+			//$this->db->where('GebruikersID', $this->input->post('opmerking_userid'));
 			$this->db->insert('DataCOpmerkingen', $insertdata);
 
 			//FF loggen
