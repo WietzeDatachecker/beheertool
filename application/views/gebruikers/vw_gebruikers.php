@@ -37,7 +37,7 @@
                     echo "<td>".$row->Gebruikersnaam."</td>";
                     echo "<td>".$row->Saldo."</td>";
                      echo "<td>"; 
-                     if ($type=="BWT") { } else { echo '<img src="../../img/nvmtoets.png"  class="nvmicon" alt=""/>';  }
+                     if (isset($type)) { echo '<img src="../img/'.$type.'.png"  class="nvmicon" alt=""/>'; } else {}
                     echo "</td>";
                     echo "</tr>";
                   }    
@@ -59,7 +59,7 @@
                     echo "<td>".$row->Gebruikersnaam."</td>";
                     echo "<td>".$row->Saldo."</td>";
                     echo "<td>"; 
-                     if ($type=="BWT") { echo '<img src="../img/btoets.png"  class="nvmicon" alt=""/>'; } else { echo '<img src="../img/nvmtoets.png"  class="nvmicon" alt=""/>';  }
+                     if (isset($type)) { echo '<img src="../img/'.$type.'.png"  class="nvmicon" alt=""/>'; } else {}
                      
                     echo "</td>";
                     echo "</tr>";
