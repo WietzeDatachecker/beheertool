@@ -53,31 +53,7 @@ if (isset($tr)) { if($tr>=1 ) { $sqltr="= $tr";  } else { $sqltr=">= 1"; } } els
 if (isset($jr)) { if($jr>=1 ) { $sqljr="$jr";  } else { $sqljr="YEAR(NOW())"; } } else { $sqljr="YEAR(NOW())"; }
 
 if (isset($br)) { if($br>"" ) { $sqlbr="AND DataCgebruikers.Type_check='$br'";   } else { $sqlbr=""; } } else { $sqlbr=""; }
-
-    for($md=1; $md<=12; $md++) {
-   
-        $qryjaarrapporttot=$this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) =$md AND YEAR(CAST(Starttijd as date)) = 2013 ");
-        $qryjaarrapportnvm=$this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) =$md AND YEAR(CAST(Starttijd as date)) = 2013 AND DataCgebruikers.Type_check='NVM' ");
-        $qryjaarrapportbwt=$this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) =$md AND YEAR(CAST(Starttijd as date)) = 2013 AND DataCgebruikers.Type_check='BWT' ");
-        $qryjaarrapportppc=$this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) =$md AND YEAR(CAST(Starttijd as date)) = 2013 AND DataCgebruikers.Type_check='PPC' ");
-
-    foreach ($qryjaarrapporttot->result() as $row) {$JRt=$row->totaal;} 
-    foreach ($qryjaarrapportnvm->result() as $row) {$JRm=$row->totaal;}
-    foreach ($qryjaarrapportbwt->result() as $row) {$JRb=$row->totaal;}
-    foreach ($qryjaarrapportppc->result() as $row) {$JRp=$row->totaal;}
-
-    $aJRt.=$JRt.",";
-    $aJRm.=$JRm.",";
-    $aJRb.=$JRb.",";
-    $aJRp.=$JRp.",";
     
-        }
-    $aJRt = substr($aJRt, 0, -1);
-    $aJRm = substr($aJRm, 0, -1);
-    $aJRb = substr($aJRb, 0, -1);
-    $aJRp = substr($aJRp, 0, -1);
-    
-        
 
     //jaar
     $qrytotaaljaar = $this->db->query("SELECT COUNT(UID) as totaal FROM  `DataCUploads`  WHERE YEAR( CAST( Starttijd AS DATE ) ) = YEAR( NOW( ) ) AND Voornaam <>  'yarno pieter' AND Voornaam <> 'yarno' AND Voornaam <> 'Walter David Alexander' $sqlkn ");
@@ -127,23 +103,12 @@ if($br>"") {
     foreach ($qryvariabelreje->result() as $row) {$vtr=$row->totaal;  } 
     foreach ($qryvariabelbeha->result() as $row) {$vbh=$row->totaal;  }  
 
-   
+    
+    
 ?>
+
+
 <div class="container">
-                <div class="tabbable"> <!-- Only required for left/right tabs -->
-                  <ul class="nav nav-tabs">
-                    <li><a href="#tab1" data-toggle="tab" class="<?PHP echo $scon; ?>">Raportage selectie</a></li>
-                    <li><a href="#tab2" data-toggle="tab">Raportage overzicht</a></li>
-                 </ul>
-
-
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="tab1"> <!-- TAB 1 -->
-
-                      
-
-                    
-
       <div class="row">
         <div class="span7">
          
@@ -485,92 +450,40 @@ if($br>"") {
 
 
   
-
-        <div id="output" style="max-width: 500px; height: 400px; margin: 0 auto"></div>
-      <br/>
-     </div><!-- / box berekening -->
-   
-
-</div><!-- /TAB! -->
-                    <div class="tab-pane" id="tab2"> <!-- TAB 1 -->
-
-                        
-<?PHP
-/**
-    echo $aJRt.'<br>';    
-    echo $aJRm.'<br>';  
-    echo $aJRb.'<br>';  
-    echo $aJRp.'<br>';   
-*/
-?>
-<script type="text/javascript">
-$(function () {
-        $('#container').highcharts({
-    
-            chart: {
-                type: 'column'
-            },
-    
-            title: {
-                text: 'overzicht per jaar'
-            },
-    
-            xAxis: {
-                categories: ['Jan', 'Feb', 'Maa', 'Apr', 'Mei', 'Jun','Jul','Aug','Sept','Okt','Nov','Dec']
-            },
-    
-            yAxis: {
-                allowDecimals: false,
-                min: 0,
-                title: {
-                    text: 'Number of fruits'
-                }
-            },
-    
-            tooltip: {
-                formatter: function() {
-                    return '<b>'+ this.x +'</b><br/>'+
-                        this.series.name +': '+ this.y +'<br/>'+
-                        'Total: '+ this.point.stackTotal;
-                }
-            },
-    
-            plotOptions: {
-                column: {
-                    stacking: 'normal'
-                }
-            },
-    
-            series: [{
-                name: 'NVM',
-                data: [<?PHP echo $aJRm; ?>],
-                stack: 'male'
-            }, {
-                name: 'BWT',
-                data: [<?PHP echo $aJRb; ?>],
-                stack: 'male'
-            }, {
-                name: 'PPC',
-                data: [<?PHP echo $aJRp; ?>],
-                stack: 'male'
-            }]
-        });
-    });
-    
-
-        </script>
-        <div id="container" style="min-width: 800px; height: 400px; margin: 0 auto"></div>
-
-
-
-                    </div><!-- /TAB! -->
-                </div>
-            </div>
-
-
-
-
         <script src="../../js/highcharts.js"></script>
         <script src="../js/highcharts.js"></script>
         <script src="../../js/modules/exporting.js"></script>
         <script src="../js/modules/exporting.js"></script>
+
+        <div id="output" style="max-width: 500px; height: 400px; margin: 0 auto"></div>
+      <br/>
+     </div><!-- / box berekening -->
+     <?PHP
+         //$qrynaam   = $this->db->query("SELECT * FROM  `DataCUploads`  WHERE UID>1 AND Voornaam>'' GROUP BY Achternaam  ORDER BY UID ASC " );
+         $qrytnaa   = $this->db->query("SELECT *, COUNT(UID) as totaal FROM  `DataCUploads`  WHERE UID>1 AND Voornaam <>  'yarno pieter' AND Voornaam <> 'yarno' AND Voornaam <> 'Walter David Alexander' AND Voornaam>''  GROUP BY  Voornaam  ORDER BY UID ASC " );
+        
+                        
+                         foreach ($qrytnaa->result() as $row)
+                            {
+                                $nr=$row->totaal;
+                                if ($nr>=2 ) { 
+
+                                echo $row->totaal.' == <br>';
+                                $aa=$row->Voornaam; 
+                               
+                                //echo $row->Achternaam.' '.$row->Voornaam'<br>';
+
+                                
+                                $qrynaam   = $this->db->query("SELECT * FROM  DataCUploads  WHERE Voornaam='$aa'  AND Voornaam <>  'yarno pieter' AND Voornaam <> 'yarno' AND Voornaam <> 'Walter David Alexander' GROUP BY Achternaam ORDER BY Voornaam ASC " );
+                                             foreach ($qrynaam->result() as $row)
+                                        {
+                                        
+                                            echo $row->Geboortedatum.' | '.$row->Voornaam.' |  '.$row->Achternaam . ' || '.$row->UID . ' || '.$row->Status.'<br>' ;
+                                        }
+
+                                 }
+                 
+                            }
+                        
+                    
+    ?> 

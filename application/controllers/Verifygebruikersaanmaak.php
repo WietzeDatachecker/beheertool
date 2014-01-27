@@ -38,7 +38,7 @@ class VerifyLogin extends CI_Controller {
         $this->load->view('gebruikers/vw_gebruikersaanmaken');
       }
       
-      $this->load->view('vw_footervervolg', '');
+      $this->load->view('vw_footer', '');
     }
     
   }

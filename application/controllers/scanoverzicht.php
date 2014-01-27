@@ -17,6 +17,9 @@ class scanoverzicht extends CI_Controller {
       $data['id'] = $session_data['id'];
       $data['naam'] = $session_data['naam'];
       $data['go'] = 0;
+
+      
+      
       $this->load->view('vw_header', $data);
       $this->load->view('scans/vw_scansoverzicht', $data);
       $this->load->view('vw_footer', '');
@@ -115,7 +118,7 @@ class scanoverzicht extends CI_Controller {
                       {
                         if($ind < 1)
                         {
-                          /*
+                         
                         if($result_data['GetDataCheckDataNewBETAResult']['Comp_Tradenames']['Expl_Comp_Tradenames'][$y]['UID_Comp'] == $masterid )
                         {
                           if($result_data['GetDataCheckDataNewBETAResult']['Comp_Tradenames']['Expl_Comp_Tradenames'][$y]['UID_Comp'] == $result_data['GetDataCheckDataNewBETAResult']['Comp_Businessnames']['Expl_Comp_Businessnames'][$y]['UID_Comp'])
@@ -181,7 +184,7 @@ class scanoverzicht extends CI_Controller {
                             };
                            
                           
-                        }; */
+                        }; 
                       } else {
 
                         if($result_data['GetDataCheckDataNewBETAResult']['Comp_Tradenames']['Expl_Comp_Tradenames'][$ind]['UID_Comp'] == $result_data['GetDataCheckDataNewBETAResult']['Comp_Businessnames']['Expl_Comp_Businessnames'][$ind]['UID_Comp'])
@@ -487,15 +490,16 @@ class scanoverzicht extends CI_Controller {
             'debt_adres' => $result_data['GetDataCheckDataNewBETAResult']['Debt']['Expl_Debt']['Address'],
             'debt_postcode' => $result_data['GetDataCheckDataNewBETAResult']['Debt']['Expl_Debt']['ZipCode'],
             //Historisch bevragingen[mtch]
+            //'hb_resultaat' => $this->mod_scans->getresultdescrip($result_data['GetDataCheckDataNewBETAResult']['Hits']['Expl_Hits']['Result']),
             'hb_aantalbevr' => $result_data['GetDataCheckDataNewBETAResult']['Hits']['Expl_Hits']['CountPerson'],
             'hb_aantaladres' => $result_data['GetDataCheckDataNewBETAResult']['Hits']['Expl_Hits']['DistinctAddress']
           );
 }
           
 
-          $this->load->view('scans/vw_headervervolg', $data);
+          $this->load->view('vw_header', $data);
           $this->load->view('scans/vw_scandetail.php', $idarr);
-          $this->load->view('scans/vw_footervervolg', '');
+          $this->load->view('vw_footer', '');
 
             } else {
               
@@ -532,9 +536,9 @@ class scanoverzicht extends CI_Controller {
 
              // /print_r($idarr);
 
-              $this->load->view('scans/vw_headervervolg', $data);
+              $this->load->view('vw_header', $data);
               $this->load->view('scans/vw_scandetail.php', $idarr);
-              $this->load->view('scans/vw_footervervolg', '');
+              $this->load->view('vw_footer', '');
 
             }
               

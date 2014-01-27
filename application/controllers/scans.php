@@ -18,9 +18,9 @@ function scanzoeken(){
       $data['naam'] = $session_data['naam'];
       $data['zoekw'] = $this->input->post('achternaam');
       $data['go'] = 0;
-      $this->load->view('vw_headervervolg', $data);
+      $this->load->view('vw_header', $data);
       $this->load->view('scans/vw_scansoverzicht', $data);
-      $this->load->view('vw_footervervolg', '');
+      $this->load->view('vw_footer', '');
     }
 
 }
@@ -34,9 +34,9 @@ function scanselect(){
       $data['naam'] = $session_data['naam'];
       $data['go'] = $this->input->post('go');
       $data['zoekw'] = $this->input->post('achternaam');
-      $this->load->view('vw_headervervolg', $data);
+      $this->load->view('vw_header', $data);
       $this->load->view('scans/vw_scansoverzicht', $data);
-      $this->load->view('vw_footervervolg', '');
+      $this->load->view('vw_footer', '');
     }
 
 }

@@ -5,8 +5,9 @@ else if ($go==1) { $sqlgo="or Status<=2";}
 else if ($go>=3) { $sqlgo="or Status=".$go;} 
 else { $sqlgo=""; }
 
+		/**
 
-			  
+		 
 		if(isset($zoekw)) {
 				$query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE DataCUploads.Achternaam like '%".$zoekw."%' and ( UserID<1 $sqlgo )  ORDER BY DataCUploads.UID DESC ");				
 							
@@ -14,7 +15,8 @@ else { $sqlgo=""; }
 				$query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE UserID<1 $sqlgo  ORDER BY DataCUploads.UID DESC LIMIT 100");
 												
 			  }
-
+		
+		*/
 
 	?>
 
@@ -58,7 +60,12 @@ else { $sqlgo=""; }
 			                        echo "<tr class='info'>";
 			                      }
 			                      $x++;
-			                      echo "<td><a href='../scanoverzicht/scandetails/".$row->IDCid."'><i class='icon-search'></i></a></td>";
+			                      
+			                      if(isset($zoekw)) {
+			                      	 echo "<td><a href='../scanoverzicht/scandetails/".$row->IDCid."'><i class='icon-search'></i></a></td>";
+			                      	} else {
+			                      	echo "<td><a href='scanoverzicht/scandetails/".$row->IDCid."'><i class='icon-search'></i></a></td>";
+			                 		}	
 			                      echo "<td>".$x."</td>";
 			                      echo "<td class='bl'><a href='../gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
 			                      echo "<td>".$row->Voornaam." ".$row->Achternaam."</td>";

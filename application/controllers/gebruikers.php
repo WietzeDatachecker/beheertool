@@ -31,9 +31,9 @@ class gebruikers extends CI_Controller {
       $data['id'] = $session_data['id'];
       $data['naam'] = $session_data['naam'];
       $data['zoekw'] = $this->input->post('bedrijfsnaam');
-      $this->load->view('vw_headervervolg', $data);
+      $this->load->view('vw_header', $data);
       $this->load->view('gebruikers/vw_gebruikers', $data);
-      $this->load->view('vw_footervervolg', '');
+      $this->load->view('vw_footer', '');
     }
 
 }
@@ -54,7 +54,7 @@ class gebruikers extends CI_Controller {
 
       
 
-      $this->load->view($classurl.'vw_headervervolg', $data);
+      $this->load->view($classurl.'vw_header', $data);
           
            
 
@@ -69,7 +69,7 @@ class gebruikers extends CI_Controller {
           $this->load->view('gebruikers/vw_gebruikersaanmaken',$arr);
        
           
-          $this->load->view($classurl.'vw_footervervolg', '');
+          $this->load->view('vw_footer', '');
         }
     
    }
@@ -88,7 +88,7 @@ class gebruikers extends CI_Controller {
 
       
 
-      $this->load->view($classurl.'vw_headervervolg', $data);
+      $this->load->view($classurl.'vw_header', $data);
           
            
 
@@ -103,7 +103,7 @@ class gebruikers extends CI_Controller {
           $this->load->view('gebruikers/vw_gebruikersaanmakenwalter',$arr);
        
           
-          $this->load->view($classurl.'vw_footervervolg', '');
+          $this->load->view('vw_footer', '');
         }
     
    }
@@ -177,7 +177,7 @@ class gebruikers extends CI_Controller {
             $data['username'] = $session_data['username'];
             $data['id'] = $session_data['id'];
             $data['naam'] = $session_data['naam'];
-            $this->load->view($classurl.'vw_headervervolg', $data);
+            $this->load->view($classurl.'vw_header', $data);
 
             $arrresponse = array(
                             'Bedrijfsnaam' => $this->input->post('bedrijfsnaam'),
@@ -187,7 +187,7 @@ class gebruikers extends CI_Controller {
             );
 
             $this->load->view('gebruikers/success',$arrresponse);//loading success view
-             $this->load->view($classurl.'vw_footervervolg', '');
+             $this->load->view('vw_footer', '');
           } else {
             $this->load->view('gebruikers/mislukt');//loading success view
           }
@@ -241,7 +241,7 @@ function insert_gebruikerwalter() {
             $data['username'] = $session_data['username'];
             $data['id'] = $session_data['id'];
             $data['naam'] = $session_data['naam'];
-            $this->load->view($classurl.'vw_headervervolg', $data);
+            $this->load->view($classurl.'vw_header', $data);
 
             $arrresponse = array(
                             'Bedrijfsnaam' => $this->input->post('bedrijfsnaam'),
@@ -251,7 +251,7 @@ function insert_gebruikerwalter() {
             );
 
             $this->load->view('gebruikers/success',$arrresponse);//loading success view
-             $this->load->view($classurl.'vw_footervervolg', '');
+             $this->load->view('vw_footer', '');
           } else {
             $this->load->view('gebruikers/mislukt');//loading success view
           }
@@ -274,9 +274,9 @@ function haalgebruikersgegevens($gebr_id, $saldosucces, $wwsucces, $edtsucces){
             'edtsucces' => $edtsucces
             );
     
-      $this->load->view('gebruikers/vw_headervervolg', $data);
+      $this->load->view('vw_header', $data);
       $this->load->view('gebruikers/vw_editgebruiker', $arrgebr);
-      $this->load->view('gebruikers/vw_footervervolg', '');
+      $this->load->view('vw_footer', '');
     }
 
 }
@@ -435,14 +435,79 @@ function insert_saldo() {
           
           if($retbool == 'true') {
             //Insertgelukt en redirect
-            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('opmerking_userid').'/false/false/false', 'refresh');
+            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('opmerking_userid').'/false/false/false'.$retbool, 'refresh');
           }
 
            
         }
       }
   
-  
+   function blokeer_gebruiker() {  
+
+      $this->load->helper('form');
+      $this->load->library('form_validation'); 
+
+      $this->form_validation->set_rules('Ingetrokken_ingetrokken', 'Weet u het zeker om', 'required');
+     
+         if($this->form_validation->run() == FALSE)
+        {
+           redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false'.$retbool, 'refresh');
+        } else {
+         //Even de opmerking inserten
+          $this->load->model('mod_blokeer');
+          $retbool = $this->mod_blokeer->blokeergebruiker();
+          
+          if($retbool == 'true') {
+            //Insertgelukt en redirect
+            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false'.$retbool, 'refresh');
+          }
+
+         }  
+        
+      }
+
+      function deblokeer_gebruiker() {  
+
+      $this->load->helper('form');
+      $this->load->library('form_validation'); 
+
+      $this->form_validation->set_rules('Ingetrokken_ingetrokken', 'Weet u het zeker', 'required');
+     
+         if($this->form_validation->run() == FALSE)
+        {
+           redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false'.$retbool, 'refresh');
+        } else {
+         //Even de opmerking inserten
+          $this->load->model('mod_blokeer');
+          $retbool = $this->mod_blokeer->deblokeergebruiker();
+          
+          if($retbool == 'true') {
+            //Insertgelukt en redirect
+            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false'.$retbool, 'refresh');
+          }
+
+         }  
+        
+      }
+   
+       function delete_actie() {  
+
+      $this->load->helper('form');
+      $this->load->library('form_validation'); 
+
+
+         //Even de opmerking inserten
+          $this->load->model('mod_opmerkingen');
+          $retbool = $this->mod_opmerkingen->deleteActie();
+         //echo $retbool; 
+          if($retbool == 'true') {
+            //Insertgelukt en redirect
+            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('actie_userid').'/false/false/false'.$retbool, 'refresh');
+            } 
+
+          
+        
+      }
 }
 
 

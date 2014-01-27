@@ -38,9 +38,9 @@ class rapportage extends CI_Controller {
       
             
       
-      $this->load->view('vw_headervervolg', $data);
+      $this->load->view('vw_header', $data);
       $this->load->view('rapportage/vw_rapportage', $data);
-      $this->load->view('vw_footervervolg', '');
+      $this->load->view('vw_footer', '');
     }
 
 }

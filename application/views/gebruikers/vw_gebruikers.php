@@ -33,7 +33,9 @@
                     $type =  $row->Type_check;
                     echo "<td><a href='../gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'><i class='icon-pencil'></i></a>";
                     echo "<td>".$row->UID."</td>";
-                    echo "<td class='bl'><a href='../gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
+                    echo "<td class='bl'>"; 
+                    if ($row->Ingetrokken==1) {echo "<i class='icon-warning-sign icon-1x' style='color:red;'></i>"; }
+                    echo "<a href='../gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
                     echo "<td>".$row->Gebruikersnaam."</td>";
                     echo "<td>".$row->Saldo."</td>";
                      echo "<td>"; 
@@ -53,9 +55,12 @@
                       echo "<tr>";
                       }
                     $type =  $row->Type_check;
+                    
                     echo "<td><a href='gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'><i class='icon-pencil'></i></a>";
                     echo "<td>".$row->UID."</td>";
-                    echo "<td class='bl'><a href='gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
+                     echo "<td class='bl'>"; 
+                    if ($row->Ingetrokken==1) {echo "<i class='icon-warning-sign icon-1x' style='color:red;'></i>"; }
+                    echo "<a href='../gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
                     echo "<td>".$row->Gebruikersnaam."</td>";
                     echo "<td>".$row->Saldo."</td>";
                     echo "<td>"; 

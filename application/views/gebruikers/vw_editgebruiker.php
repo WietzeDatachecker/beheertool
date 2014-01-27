@@ -16,6 +16,7 @@
 		$laatstelogin = $row->Laatst_inlog;
 		$saldo = $row->Saldo;
 		$portal =  $row->Type_check;
+		$blok =  $row->Ingetrokken;
 
 		//adres gegevens
 		$adres = $row->Adres;
@@ -117,6 +118,81 @@
   </div>
 </div>
 
+
+
+<!-- Modal blokeer-->
+<div id="myModalblokeer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+  <div class="modal-header"> <!-- modal-header -->
+    <h3 id="myModalLabel">Blokeer gebruiker</h3>
+  </div> <!-- /modal-header -->
+  <div class="modal-body"> <!-- modal-body -->
+    <form class="form-horizontal pull-left " id="registerHere" method="post" action="<?php echo base_url();?>index.php/gebruikers/blokeer_gebruiker">
+	  	<fieldset>
+				    <div class="control-group">
+
+				    <label class="" for="input01">Weet u het zeker om <strong><?php echo $bedrijfsnaam ?></strong> te blokeren? &nbsp
+				      
+				    	<input type="checkbox" value="1" name="Ingetrokken_ingetrokken"> Ja <span style="color:red;">*</span>
+
+				    </label>
+
+
+				        <input type="hidden" value="<?php echo $id; ?>" name="blokeer_userid" >
+				        <input type="hidden" value="<?php echo $naam; ?>" name="blokeer_naam" >
+				     
+					</div> 
+	    
+
+		</fieldset>
+	
+</div><!-- /modal-body -->
+<div class="modal-footer"> <!-- modal-footer -->
+  	 			<button class="btn btn-danger">Blokeeer</button>
+  	 </form>
+   			 <button class="btn" data-dismiss="modal" aria-hidden="true">Annuleer</button>
+   
+</div> <!-- /modal-footer -->
+</div>
+<!-- /Modal blokeer -->
+
+
+<!-- Modal DEblokeer-->
+<div id="myModalDEblokeer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+  <div class="modal-header"> <!-- modal-header -->
+    <h3 id="myModalLabel">Deblokeer gebruiker</h3>
+  </div> <!-- /modal-header -->
+  <div class="modal-body"> <!-- modal-body -->
+    <form class="form-horizontal pull-left " id="registerHere" method="post" action="<?php echo base_url();?>index.php/gebruikers/deblokeer_gebruiker">
+	  	<fieldset>
+				    <div class="control-group">
+
+				    <label class="" for="input01">Weet u het zeker om <strong><?php echo $bedrijfsnaam ?></strong> te deblokeren? &nbsp
+				      
+				    	<input type="checkbox" value="0" name="Ingetrokken_ingetrokken"> Ja <span style="color:red;">*</span>
+
+				    </label>
+
+
+				        <input type="hidden" value="<?php echo $id; ?>" name="blokeer_userid" >
+				        <input type="hidden" value="<?php echo $naam; ?>" name="blokeer_naam" >
+				     
+					</div> 
+	    
+
+		</fieldset>
+	
+</div><!-- /modal-body -->
+<div class="modal-footer"> <!-- modal-footer -->
+  	 			<button class="btn btn-primary">Deblokeeer</button>
+  	 </form>
+   			 <button class="btn" data-dismiss="modal" aria-hidden="true">Annuleer</button>
+   
+</div> <!-- /modal-footer -->
+</div>
+<!-- /Modal DEblokeer -->
+
+
+
 <!-- ModalEdit -->
 
 <div id="myModalEdit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -127,7 +203,7 @@
     <form class="form-horizontal pull-left " id="registerHere" method="post" action="<?php echo base_url();?>index.php/gebruikers/insert_opmerking">
 	  <fieldset>
 	  	<?PHP
-foreach ($qryopmerkingen->result() as $row)
+foreach ($qryopmerkingen->result() as $row )
 						               {
 
 			if ($row->Actie==1)	{
@@ -328,6 +404,20 @@ foreach ($qryopmerkingen->result() as $row)
 					        <input type="text" class="input-xlarge uneditable-input" id="user_email" name="portal" value="<?php if($portal == 'BWT') { echo 'Bewusttoetsen';} else { echo 'NVM Woontoets'; } ?>">
 					      </div>
 					</div>
+					
+					<?php  if($blok == 1) { ?>
+					<div class="control-group"><!-- DEblokeer knop -->
+					      <div class="controls">
+					          <a href="#myModalDEblokeer" role="button" class="btn btn-small btn-success" data-toggle="modal">Deblokeer gebruiker</a>
+					      </div>
+					</div> <!-- /DEblokeer knop -->
+					<?PHP } else { ?> 
+					<div class="control-group"><!-- blokeer knop -->
+					      <div class="controls">
+					          <a href="#myModalblokeer" role="button" class="btn btn-small btn-danger" data-toggle="modal">Blokeer gebruiker</a>
+					      </div>
+					</div> <!-- /blokeer knop -->
+					<?PHP } ?> 
 				    </div>
 				    <div class="tab-pane" id="tab2">
 				    	<form class="form-horizontal pull-left " id="registerHere" method="post" action="<?php echo base_url();?>index.php/gebruikers/updategegevens">
@@ -540,7 +630,18 @@ foreach ($qryopmerkingen->result() as $row)
 						                     
 						                      echo "<td>";
 						                      
-						                      if($row->Actie == 1) {echo "<a href='#myModalEdit' role='button' data-toggle='modal'><i class='icon-warning-sign icon-1x' style='color:red;'></i></a>" ;}
+						                      if($row->Actie == 1) {
+						                      	
+						                      	?>
+						                      	<form class="" id="" method="post" action="<?php echo base_url();?>index.php/gebruikers/delete_actie">
+						                      	<input type="hidden" value="<?php echo $row->UID; ?>" name="Oid" >
+						                      	<input type="hidden" value="0" name="Actie_actie" >
+						                      	<input type="hidden" value="<?php echo $row->GebruikersID; ?>" name="actie_userid" >
+						                      	<button><i class='icon-warning-sign icon-1x' style='color:red;'></i></button>
+						                      	</form>
+						                      	<?PHP
+
+						                      }
 						                      echo "</td>";
 						                      echo "</tr>"; 
 						                    } 

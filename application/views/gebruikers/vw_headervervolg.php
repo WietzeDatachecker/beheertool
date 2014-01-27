@@ -1,11 +1,13 @@
 <?php
-	$testurl = 'http://development.datachecker.nl/beheertool/';
-	$liveurl = 'http://www.datachecker.nl/Databeheer/';
-	$test = false;
+	$testurl = base_url();
+	$liveurl = base_url().'/Databeheer/';
+	$test = true;
 
 	//$currpage = $_SERVER['HTTP_REFERER']; 
 
-	$url=$liveurl;
+	//$temp= $_SERVER['HTTP_REFERER'];
+	//$server=str_replace('index.php/gebruikers', '', $temp);
+	//$testurl = $server; 
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +21,7 @@
 	    echo '<link href="'.$testurl.'css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">';
 	    echo '<link rel="stylesheet" href="'.$testurl.'css/font-awesome.min.css">';
 	    echo '<link href="'.$testurl.'css/datac-style.css" rel="stylesheet" media="screen">';
+	    $url=$testurl;
 	} else {
 		echo '<title>DataChecker beheer</title>';
 	    echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
@@ -26,6 +29,7 @@
 	    echo '<link href="'.$liveurl.'css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">';
 	    echo '<link rel="stylesheet" href="'.$liveurl.'css/font-awesome.min.css">';
 	    echo '<link href="'.$liveurl.'css/datac-style.css" rel="stylesheet" media="screen">';
+	    $url=$liveurl;
 	}
 
 ?>

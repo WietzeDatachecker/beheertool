@@ -4,10 +4,10 @@
 <head>
    <title>DataChecker beheer</title>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
-   <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-   <link rel="stylesheet" href="../css/font-awesome.min.css">
-   <link href="../css/datac-style.css" rel="stylesheet" media="screen">
+   <link href="<?PHP echo base_url();?>/css/bootstrap.min.css" rel="stylesheet" media="screen">
+   <link href="<?PHP echo base_url();?>/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+   <link rel="stylesheet" href="<?PHP echo base_url();?>/css/font-awesome.min.css">
+   <link href="<?PHP echo base_url();?>/css/datac-style.css" rel="stylesheet" media="screen">
    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		
  </head>
@@ -22,11 +22,11 @@
 				<i class="icon-cog"></i>
 			</a>
 			
-			<a href="home"class="brand">
-				DataChecker beheer <sup>1.8</sup>
+			<a href="<?PHP echo base_url();?>index.php/home"class="brand">
+				DataChecker beheer <sup>1.9</sup>
 			</a>		
 			 <ul class="nav">
-			 	<li class=""><a href="home">Dashboard</a></li>
+			 	<li class=""><a href="<?PHP echo base_url();?>index.php/home">Dashboard</a></li>
 			 	<li class="dropdown">
 			 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="icon-user wit"></i> 
@@ -35,9 +35,9 @@
 						</a>
 						
 						<ul class="dropdown-menu">
-							<li> <a href="gebruikers">Overzicht</a></li>
-							<li> <a href="gebruikers/gebruikersaanmaken">Aanmaken</a></li>
-							<li> <a href="gebruikers/gebruikersaanmakenwalter">Test gebruiker aanmaken</a></li>
+							<li> <a href="<?PHP echo base_url();?>index.php/gebruikers">Overzicht</a></li>
+							<li> <a href="<?PHP echo base_url();?>index.php/gebruikers/gebruikersaanmaken">Aanmaken</a></li>
+							<li> <a href="<?PHP echo base_url();?>index.php/gebruikers/gebruikersaanmakenwalter">Test gebruiker aanmaken</a></li>
 						</ul>
 			 	
 			 	</li>
@@ -49,11 +49,11 @@
 						</a>
 						
 						<ul class="dropdown-menu">
-							<li> <a href="scanoverzicht">Overzicht</a></li>
+							<li> <a href="<?PHP echo base_url();?>index.php/scanoverzicht">Overzicht</a></li>
 						</ul>
 			 	
 			 	</li>
-			 	<li class=""><a href="rapportage"><i class="icon-eur wit"></i> Rapportages</span></a> </li>	
+			 	<li class=""><a href="<?PHP echo base_url();?>index.php/rapportage"><i class="icon-eur wit"></i> Rapportages</span></a> </li>	
 			 </ul>
 			<div class="nav-collapse collapse">
 				<ul class="nav pull-right">
@@ -67,7 +67,7 @@
 						</a>
 						
 						<ul class="dropdown-menu">
-							<li> <a href="home/logout">Uitloggen</a></li>
+							<li> <a href="<?PHP echo base_url();?>index.php/home/logout">Uitloggen</a></li>
 						</ul>
 						
 					</li>
