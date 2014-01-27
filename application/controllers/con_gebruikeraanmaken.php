@@ -17,9 +17,9 @@ class gebruiker extends CI_Controller {
   
   function maakgebruikeraan()
   {
-      $this->load->view($classurl.'vw_headervervolg', $data);
+      $this->load->view($classurl.'vw_header', $data);
       $this->load->view('gebruikers/vw_gebruikersaanmaken');
-      $this->load->view($classurl.'vw_footervervolg', '');
+      $this->load->view($classurl.'vw_footer', '');
     }
   }
 }

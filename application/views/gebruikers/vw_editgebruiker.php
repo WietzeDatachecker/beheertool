@@ -558,7 +558,7 @@ foreach ($qryopmerkingen->result() as $row )
 						                      else{
 						                        echo "<tr class='info'>";
 						                      }
-						                       echo "<td><a href='../../../../../../index.php/scanoverzicht/scandetails/".$row->IDCid."'><i class='icon-search'></i></a></td>";
+						                       echo "<td><a href='".base_url()."index.php/scanoverzicht/scandetails/".$row->IDCid."'><i class='icon-search'></i></a></td>";
 						                      echo "<td>".$row->Voornaam." ".$row->Achternaam."</td>";
 						                      echo "<td>".date('d-m-Y H:i:s', strtotime($row->Starttijd))."</td>";
 						                       if($row->Status == 1 || $row->Status == 2) {

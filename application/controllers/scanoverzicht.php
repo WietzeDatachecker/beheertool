@@ -18,8 +18,8 @@ class scanoverzicht extends CI_Controller {
       $data['naam'] = $session_data['naam'];
       $data['go'] = 0;
 
-      
-      
+      $this->load->model('mod_sql');
+      $data['query'] = $this->mod_sql->sql_scanoverzicht($go);
       $this->load->view('vw_header', $data);
       $this->load->view('scans/vw_scansoverzicht', $data);
       $this->load->view('vw_footer', '');

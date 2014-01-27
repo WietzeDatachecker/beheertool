@@ -5,9 +5,10 @@ else if ($go==1) { $sqlgo="or Status<=2";}
 else if ($go>=3) { $sqlgo="or Status=".$go;} 
 else { $sqlgo=""; }
 
-		/**
 
-		 
+
+/**
+		
 		if(isset($zoekw)) {
 				$query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE DataCUploads.Achternaam like '%".$zoekw."%' and ( UserID<1 $sqlgo )  ORDER BY DataCUploads.UID DESC ");				
 							
@@ -15,8 +16,8 @@ else { $sqlgo=""; }
 				$query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE UserID<1 $sqlgo  ORDER BY DataCUploads.UID DESC LIMIT 100");
 												
 			  }
+*/	
 		
-		*/
 
 	?>
 
@@ -26,6 +27,8 @@ else { $sqlgo=""; }
         <div class="span8">
 			
 			<?PHP
+			
+			
 
         	if(isset($zoekw)) { echo "<h2>Upload gezocht op: </i>".$zoekw."</i></h2>"; } 
         			   else   { echo "<h2>Laatste 100 scans</h2>";}
@@ -48,7 +51,7 @@ else { $sqlgo=""; }
 			              <tbody>
 			                <?php
 			                $x=0;
-			                  foreach ($query->result() as $row)
+			                  foreach ($query as $row)
 			                    {
 			                      if($row->Status == 1 || $row->Status == 2) {
 			                        echo "<tr class='success'>";
