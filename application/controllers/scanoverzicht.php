@@ -16,10 +16,12 @@ class scanoverzicht extends CI_Controller {
       $data['username'] = $session_data['username'];
       $data['id'] = $session_data['id'];
       $data['naam'] = $session_data['naam'];
-      $data['go'] = 0;
+      $data['go'] = 0 ;
 
-      $this->load->model('mod_sql');
-      $data['query'] = $this->mod_sql->sql_scanoverzicht($go);
+    
+      $this->load->model('mod_sql', '', $data);
+      //$data['query'] = $this->mod_sql->sql_scanoverzicht();
+      
       $this->load->view('vw_header', $data);
       $this->load->view('scans/vw_scansoverzicht', $data);
       $this->load->view('vw_footer', '');
@@ -84,7 +86,7 @@ class scanoverzicht extends CI_Controller {
             if($result_data['GetDataCheckDataNewBETAResult']['ErrorMessage'] == '') {
               echo "Geen error";
               //print_r($result_id);
-              //print_r($result_data);
+             // print_r($result_data);
 
               //Een apparte array maken met alles wat voor comp is.
               $comparr = array();
@@ -96,7 +98,7 @@ class scanoverzicht extends CI_Controller {
               $arrAdr = $result_data['GetDataCheckDataNewBETAResult']['Comp_Addresses']['Expl_Comp_Addresses'];
               $naamarr = $result_data['GetDataCheckDataNewBETAResult']['Comp_Tradenames']['Expl_Comp_Tradenames'];
               $bnamearr = $result_data['GetDataCheckDataNewBETAResult']['Comp_Businessnames']['Expl_Comp_Businessnames'];
-              print_r($masterarr);
+              //print_r($masterarr);
               $aantalmaster = count(array_unique($masterarr, SORT_REGULAR));
               $aantalNaam = count(array_unique($naamarr, SORT_REGULAR));
               $comoutarr = array();
@@ -105,12 +107,12 @@ class scanoverzicht extends CI_Controller {
               $y = 1 -1;
               $ind = 0;
 
-              print_r($masterarr);
+              //print_r($masterarr);
  if($aantalmaster > 0) {
               while($y <= $aantalmaster) 
                 { 
                   if($y <= $aantalmaster ) {
-                    echo $aantalmaster;
+                   
 
                     if($masterid = $result_data['GetDataCheckDataNewBETAResult']['Comp_Master']['Expl_Comp_Master'][$y]['UID_COMP'])
                     {
@@ -118,7 +120,7 @@ class scanoverzicht extends CI_Controller {
                       {
                         if($ind < 1)
                         {
-                         
+                          /*
                         if($result_data['GetDataCheckDataNewBETAResult']['Comp_Tradenames']['Expl_Comp_Tradenames'][$y]['UID_Comp'] == $masterid )
                         {
                           if($result_data['GetDataCheckDataNewBETAResult']['Comp_Tradenames']['Expl_Comp_Tradenames'][$y]['UID_Comp'] == $result_data['GetDataCheckDataNewBETAResult']['Comp_Businessnames']['Expl_Comp_Businessnames'][$y]['UID_Comp'])
@@ -184,7 +186,7 @@ class scanoverzicht extends CI_Controller {
                             };
                            
                           
-                        }; 
+                        }; */
                       } else {
 
                         if($result_data['GetDataCheckDataNewBETAResult']['Comp_Tradenames']['Expl_Comp_Tradenames'][$ind]['UID_Comp'] == $result_data['GetDataCheckDataNewBETAResult']['Comp_Businessnames']['Expl_Comp_Businessnames'][$ind]['UID_Comp'])

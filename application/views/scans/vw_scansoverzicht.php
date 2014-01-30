@@ -1,10 +1,6 @@
 <?php
 
-	 if ($go==0) { $sqlgo="or Status>=1";} 
-else if ($go==1) { $sqlgo="or Status<=2";} 
-else if ($go>=3) { $sqlgo="or Status=".$go;} 
-else { $sqlgo=""; }
-
+$query = $this->mod_sql->sql_scanoverzicht($go, $zoekw);
 
 
 /**
