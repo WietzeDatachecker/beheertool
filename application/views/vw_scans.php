@@ -1,5 +1,6 @@
 <?php
-  $query = $this->db->query('SELECT *,DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID ORDER BY DataCUploads.UID DESC LIMIT 10 ');
+    $query = $this->mod_sql->sql_homeoverzicht();
+
 ?>
 
 

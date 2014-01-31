@@ -16,7 +16,11 @@ class gebruikers extends CI_Controller {
       $data['username'] = $session_data['username'];
       $data['id'] = $session_data['id'];
       $data['naam'] = $session_data['naam'];
-      $this->load->view('vw_header', $data);
+      
+      //$data['go'] = 0 ;
+      $this->load->model('mod_sql', '', $data);
+
+      $this->load->view('vw_header', $data); 
       $this->load->view('gebruikers/vw_gebruikers', '');
       $this->load->view('vw_footer', '');
     }
@@ -31,6 +35,8 @@ class gebruikers extends CI_Controller {
       $data['id'] = $session_data['id'];
       $data['naam'] = $session_data['naam'];
       $data['zoekw'] = $this->input->post('bedrijfsnaam');
+
+      $this->load->model('mod_sql', '', $data);
       $this->load->view('vw_header', $data);
       $this->load->view('gebruikers/vw_gebruikers', $data);
       $this->load->view('vw_footer', '');
@@ -273,7 +279,7 @@ function haalgebruikersgegevens($gebr_id, $saldosucces, $wwsucces, $edtsucces){
             'wwsucces' => $wwsucces,
             'edtsucces' => $edtsucces
             );
-    
+      $this->load->model('mod_sql', '', $data);
       $this->load->view('vw_header', $data);
       $this->load->view('gebruikers/vw_editgebruiker', $arrgebr);
       $this->load->view('vw_footer', '');

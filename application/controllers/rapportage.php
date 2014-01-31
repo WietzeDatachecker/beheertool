@@ -16,6 +16,7 @@ class rapportage extends CI_Controller {
       $data['username'] = $session_data['username'];
       $data['id'] = $session_data['id'];
       $data['naam'] = $session_data['naam'];
+      $this->load->model('mod_sql', '', $data);
       $this->load->view('vw_header', $data);
       $this->load->view('rapportage/vw_rapportage', '');
       $this->load->view('vw_footer', '');
@@ -37,7 +38,7 @@ class rapportage extends CI_Controller {
       $data['jr'] = $this->input->post('jaarrap');
       
             
-      
+      $this->load->model('mod_sql', '', $data);
       $this->load->view('vw_header', $data);
       $this->load->view('rapportage/vw_rapportage', $data);
       $this->load->view('vw_footer', '');

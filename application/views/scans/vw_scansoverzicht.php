@@ -3,16 +3,7 @@
 $query = $this->mod_sql->sql_scanoverzicht($go, $zoekw);
 
 
-/**
-		
-		if(isset($zoekw)) {
-				$query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE DataCUploads.Achternaam like '%".$zoekw."%' and ( UserID<1 $sqlgo )  ORDER BY DataCUploads.UID DESC ");				
-							
-			  } else {
-				$query = $this->db->query("SELECT *, DataCgebruikers.Bedrijfsnaam FROM DataCUploads INNER JOIN DataCgebruikers ON DataCUploads.UserID=DataCgebruikers.UID WHERE UserID<1 $sqlgo  ORDER BY DataCUploads.UID DESC LIMIT 100");
-												
-			  }
-*/	
+
 		
 
 	?>

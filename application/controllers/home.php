@@ -15,6 +15,8 @@ class Home extends CI_Controller {
       $data['username'] = $session_data['username'];
       $data['id'] = $session_data['id'];
       $data['naam'] = $session_data['naam'];
+
+     $this->load->model('mod_sql', '', $data);
      $this->load->view('vw_header', $data);
      $this->load->view('vw_home', '');
      $this->load->view('vw_footer', '');

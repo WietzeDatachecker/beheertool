@@ -18,10 +18,35 @@
       <tbody>
       	<?php
 
-        $query = $this->mod_sql->sql_gebruikersoverzicht($zoekw);
-        //print_r ($query);
+        if(isset($zoekw)) { 
+  			
+                 $query = $this->db->query("SELECT * FROM `DataCgebruikers` WHERE Bedrijfsnaam like '%".$zoekw."%'");
 
-         foreach ($query as $row) {
+                  foreach ($query->result() as $row) {
+                     if($row->Saldo <= 5 ) {
+                        echo "<tr class='error'>";
+                      }
+                      else
+                      {
+                      echo "<tr>";
+                      }
+                    $type =  $row->Type_check;
+                    echo "<td><a href='../gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'><i class='icon-pencil'></i></a>";
+                    echo "<td>".$row->UID."</td>";
+                    echo "<td class='bl'>"; 
+                    if ($row->Ingetrokken==1) {echo "<i class='icon-warning-sign icon-1x' style='color:red;'></i>"; }
+                    echo "<a href='../gebruikers/haalgebruikersgegevens/".$row->UID."/false/false/false'>".$row->Bedrijfsnaam."</a></td>";
+                    echo "<td>".$row->Gebruikersnaam."</td>";
+                    echo "<td>".$row->Saldo."</td>";
+                     echo "<td>"; 
+                     if (isset($type)) { echo '<img src="../img/'.$type.'.png"  class="nvmicon" alt=""/>'; } else {}
+                    echo "</td>";
+                    echo "</tr>";
+                  }    
+          } else {
+            $query = $this->db->query('SELECT * FROM DataCgebruikers ORDER BY UID DESC');
+
+                  foreach ($query->result() as $row) {
                      if($row->Saldo <= 5 ) {
                         echo "<tr class='error'>";
                       }
@@ -44,11 +69,9 @@
                     echo "</td>";
                     echo "</tr>";
                   }
-
-
-
-       
-          
+            
+           
+          }
         ?>
       </tbody>
     </table>

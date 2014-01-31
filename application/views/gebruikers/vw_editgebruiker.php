@@ -1,11 +1,10 @@
 <?php
-    
+    $qrygegevens = $this->mod_sql->sql_qrygegevens($id);
+    $qrylogging = $this->mod_sql->sql_qrylogging($id);
+    $qrylaatstescans = $this->mod_sql->sql_qrylaatstescans($id);
+    $qryopmerkingen = $this->mod_sql->sql_qryopmerkingen($id);
 
-	$qrylaatstescans = $this->db->query('SELECT * FROM DataCUploads WHERE UserID ='.$id.' ORDER BY UID DESC' );
-	$qrygegevens = $this->db->query('SELECT * FROM `DataCgebruikers` LEFT OUTER JOIN DataCGebruikersNaw ON DataCgebruikers.UID=DataCGebruikersNaw.GebruikersID WHERE DataCgebruikers.UID ='.$id );
-	$qrylogging = $this->db->query('SELECT * FROM `DataCLogging` WHERE GebruikersID ='.$id.' order by UID ASC');
-	$qryopmerkingen = $this->db->query('SELECT * FROM `DataCOpmerkingen` WHERE GebruikersID ='.$id.' order by UID DESC');
-
+	
 	foreach ($qrygegevens->result() as $row)
 	{
 		//gebruikers gegevens
