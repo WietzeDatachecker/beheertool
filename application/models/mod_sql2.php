@@ -67,11 +67,40 @@
           }
 
         // Query rapport:  jaar overzicht 
-
+          function sql_qryjaarrapportnvm($jr) {
+            
+            if (isset($jr)) { if($jr>=1 ) { $sqljr="$jr";  } else { $sqljr="YEAR(NOW())"; } } else { $sqljr="YEAR(NOW())"; }
+            
+            for($md=1; $md<=12; $md++) {
+            $qryjaarrapportnvm=$this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) =$md AND YEAR(CAST(Starttijd as date)) = $sqljr AND DataCgebruikers.Type_check='NVM' ");
+            foreach ($qryjaarrapportnvm->result() as $row) {$JRm=$row->totaal;}
+            $aJRm.=$JRm.",";
+            }
+            return  $aJRm; 
+          }
+          function sql_qryjaarrapportbwt($jr) {
+            if (isset($jr)) { if($jr>=1 ) { $sqljr="$jr";  } else { $sqljr="YEAR(NOW())"; } } else { $sqljr="YEAR(NOW())"; }
+            
+            for($md=1; $md<=12; $md++) {
+            $qryjaarrapportbwt=$this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) =$md AND YEAR(CAST(Starttijd as date)) = $sqljr AND DataCgebruikers.Type_check='BWT' ");
+            foreach ($qryjaarrapportbwt->result() as $row) {$JRb=$row->totaal;}
+            $aJRb.=$JRb.",";
+            }
+            return  $aJRb; 
+          }
+          function sql_qryjaarrapportppc($jr) {
+            if (isset($jr)) { if($jr>=1 ) { $sqljr="$jr";  } else { $sqljr="YEAR(NOW())"; } } else { $sqljr="YEAR(NOW())"; }
+            
+            for($md=1; $md<=12; $md++) {
+            $qryjaarrapportppc=$this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) =$md AND YEAR(CAST(Starttijd as date)) = $sqljr AND DataCgebruikers.Type_check='PPC' ");
+            foreach ($qryjaarrapportppc->result() as $row) {$JRp=$row->totaal;}
+            $aJRp.=$JRp.",";
+            }
+            return  $aJRp; 
+          }
 
            // Query rapport:  jaar overzicht 
-        function sql_jaaroverzicht($jr) {
-
+          function sql_jaaroverzicht($jr) {
             
             if (isset($jr)) { if($jr>=1 ) { $sqljr="$jr";  } else { $sqljr="YEAR(NOW())"; } } else { $sqljr="YEAR(NOW())"; }
             
@@ -98,36 +127,10 @@
             return  $jaaroverzicht; 
           }
            
-            function sql_jaaroverzicht_gfr($jr, $kn) {
-            if (isset($kn)) { if($kn>=1 ) { $sqlkn="AND UserID=$kn";  } else { $sqlkn=""; } } else { $sqlkn=""; }
-            if (isset($jr)) { if($jr>=1 ) { $sqljr="$jr";  } else { $sqljr="YEAR(NOW())"; } } else { $sqljr="YEAR(NOW())"; }
-            
-            $jaaroverzicht_gfr=array();
-
-            for($md=1; $md<=12; $md++) {
-            $qryjaarrapportgoed=$this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) =$md AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status in (1,2)  $sqlkn");
-            $qryjaarrapportfout=$this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) =$md AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status in (3) $sqlkn ");
-            $qryjaarrapportreje=$this->db->query("SELECT COUNT(DataCUploads.UID) as totaal , DataCgebruikers.Type_check   FROM DataCUploads JOIN DataCgebruikers ON DataCUploads.UserID = DataCgebruikers.UID WHERE MONTH(CAST(Starttijd as date)) =$md AND YEAR(CAST(Starttijd as date)) = $sqljr AND Status in (999) $sqlkn ");
-            
-
-            foreach ($qryjaarrapportgoed->result() as $row) {$JRg=$row->totaal;}
-            foreach ($qryjaarrapportfout->result() as $row) {$JRf=$row->totaal;}
-            foreach ($qryjaarrapportreje->result() as $row) {$JRr=$row->totaal;}
-            
-            $aJRg.=$JRg.",";
-            $aJRf.=$JRf.",";
-            $aJRr.=$JRr.",";
-            }
-            $jaaroverzicht_gfr[aJRg]=$aJRg;
-            $jaaroverzicht_gfr[aJRf]=$aJRf;
-            $jaaroverzicht_gfr[aJRr]=$aJRr;
-
-            return  $jaaroverzicht_gfr; 
-          }
           
 
           // TEST rapport: JAAR
-        function sql_jaar($kn) {
+          function sql_jaar($kn) {
             if (isset($kn)) { if($kn>=1 ) { $sqlkn="AND UserID=$kn";  } else { $sqlkn=""; } } else { $sqlkn=""; }
             
           $qrytotaaljaar = $this->db->query("SELECT COUNT(UID) as totaal FROM  `DataCUploads`  WHERE YEAR( CAST( Starttijd AS DATE ) ) = YEAR( NOW( ) ) AND Voornaam <>  'yarno pieter' AND Voornaam <> 'yarno' AND Voornaam <> 'Walter David Alexander' $sqlkn ");
@@ -150,7 +153,7 @@
 
          
           //query rapport: DAG
-        function sql_dag() {
+          function sql_dag() {
             $qrytotaaldag   = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE Starttijd > '".$vandaag." 00:00:00' AND Starttijd < '".$morgen." 00:00:00' ORDER BY UID ASC");
             $qrydaggoed     = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE Starttijd > '".$vandaag." 00:00:00' AND Starttijd < '".$morgen." 00:00:00' AND Status IN (1,2)  ORDER BY UID ASC");
             $qrydagfout     = $this->db->query("SELECT COUNT(UID) as totaal FROM `DataCUploads` WHERE Starttijd > '".$vandaag." 00:00:00' AND Starttijd < '".$morgen." 00:00:00' AND Status IN (3)  ORDER BY UID ASC");
@@ -166,15 +169,15 @@
           return  $dag; 
           
 
-        }
+          }
 
                    
 
           // query rapport: klanten ophalen
-        function sql_qryklanten() {
+          function sql_qryklanten() {
           $qryklanten = $this->db->query("SELECT UID, Bedrijfsnaam FROM  `DataCgebruikers` ORDER BY Bedrijfsnaam ASC ");
           return  $qryklanten; 
-        }
+          }
 
          
 

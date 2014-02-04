@@ -105,8 +105,8 @@ if($br>"") {
 <div class="container">
                 <div class="tabbable"> <!-- Only required for left/right tabs -->
                   <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab1" data-toggle="tab"  >Rapportage selectie</a></li>
-                    
+                    <li class="active"><a href="#tab1" data-toggle="tab"  >Raportage selectie</a></li>
+                    <li><a href="#tab2" data-toggle="tab" >Jaar overzicht</a></li>
                  </ul>
 
 

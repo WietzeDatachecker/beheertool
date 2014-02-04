@@ -36,11 +36,81 @@ class rapportage extends CI_Controller {
       $data['tr'] = $this->input->post('typerap');
       $data['br'] = $this->input->post('bronrap');
       $data['jr'] = $this->input->post('jaarrap');
-      
-            
       $this->load->model('mod_sql', '', $data);
       $this->load->view('vw_header', $data);
       $this->load->view('rapportage/vw_rapportage', $data);
+      $this->load->view('vw_footer', '');
+    }
+
+}
+  function jaarrapportage(){
+   if($this->session->userdata('logged_in'))
+    
+    {
+      $session_data = $this->session->userdata('logged_in');
+      $data['username'] = $session_data['username'];
+      $data['id'] = $session_data['id'];
+      $data['naam'] = $session_data['naam'];
+      $p = $this->input->post();
+      $data['jr'] = $this->input->post('jaarrap');
+      $this->load->model('mod_sql', '', $data);
+      $this->load->view('vw_header', $data);
+      $this->load->view('rapportage/vw_rapportage_jo', '');
+      $this->load->view('vw_footer', '');
+    }
+
+}
+ function getjaar(){
+   if($this->session->userdata('logged_in'))
+    {
+      $session_data = $this->session->userdata('logged_in');
+      $data['username'] = $session_data['username'];
+      $data['id'] = $session_data['id'];
+      $data['naam'] = $session_data['naam'];
+      $p = $this->input->post();
+      $data['kn'] = $this->input->post('klantenbox');
+      $data['tr'] = $this->input->post('typerap');
+      $data['br'] = $this->input->post('bronrap');
+      $data['jr'] = $this->input->post('jaarrap');
+      $this->load->model('mod_sql', '', $data);
+      $this->load->view('vw_header', $data);
+      $this->load->view('rapportage/vw_rapportage_jo', $data);
+      $this->load->view('vw_footer', '');
+    }
+
+}
+  function jaarrapportage_nbp(){
+   if($this->session->userdata('logged_in'))
+    
+    {
+      $session_data = $this->session->userdata('logged_in');
+      $data['username'] = $session_data['username'];
+      $data['id'] = $session_data['id'];
+      $data['naam'] = $session_data['naam'];
+      $p = $this->input->post();
+      $data['jr'] = $this->input->post('jaarrap');
+      $this->load->model('mod_sql', '', $data);
+      $this->load->view('vw_header', $data);
+      $this->load->view('rapportage/vw_rapportage_nbp', '');
+      $this->load->view('vw_footer', '');
+    }
+
+}
+ function getjaar_nbp(){
+   if($this->session->userdata('logged_in'))
+    {
+      $session_data = $this->session->userdata('logged_in');
+      $data['username'] = $session_data['username'];
+      $data['id'] = $session_data['id'];
+      $data['naam'] = $session_data['naam'];
+      $p = $this->input->post();
+      $data['kn'] = $this->input->post('klantenbox');
+      $data['tr'] = $this->input->post('typerap');
+      $data['br'] = $this->input->post('bronrap');
+      $data['jr'] = $this->input->post('jaarrap');
+      $this->load->model('mod_sql', '', $data);
+      $this->load->view('vw_header', $data);
+      $this->load->view('rapportage/vw_rapportage_nbp', $data);
       $this->load->view('vw_footer', '');
     }
 

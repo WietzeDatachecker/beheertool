@@ -319,6 +319,12 @@ foreach ($qryopmerkingen->result() as $row )
 					};
 
 					?>
+				<?php if($ophsucces == 'true') {
+         				echo "<div class='alert fade in alert-success'><button type='button' class='close' data-dismiss='alert'>X</button><strong>Het saldo is met succes aangepast.</div>";
+
+					};
+
+					?>
          	<legend>Gebruikersgegevens ( <?php echo $bedrijfsnaam ?> )</legend>
 				<?PHP 
 				// factuur check

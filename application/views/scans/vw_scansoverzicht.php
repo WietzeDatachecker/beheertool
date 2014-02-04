@@ -85,12 +85,15 @@ $query = $this->mod_sql->sql_scanoverzicht($go, $zoekw);
             <h2>Selecteer</h2>
             
          <div class="control-group"><!-- control-group -->
-                <div class="controls"><!-- controls -->
+                <div class="controls input-group" ><!-- controls -->
+                <span class="input-group-addon">
                   <input type="radio" name="go" onclick="document.selectform.submit();" id="checkbox" value="0" <?php if($go==0) { echo 'checked';} ?> ><span class="selectlabel">Alles</span><br>
+                </span>
                   <input type="radio" name="go" onclick="document.selectform.submit();" id="checkbox" value="1" <?php if($go==1) { echo 'checked';} ?> ><span class="selectlabel">Goedgekeurd</span><br>
                   <input type="radio" name="go" onclick="document.selectform.submit();" id="checkbox" value="3" <?php if($go==3) { echo 'checked';} ?> ><span class="selectlabel">Afgekeurd</span><br>
                   <input type="radio" name="go" onclick="document.selectform.submit();" id="checkbox" value="999" <?php if($go==999) { echo 'checked';} ?> ><span class="selectlabel">Gereject</span>
-                  <input type="hidden" id="achternaam" name="achternaam" value="<? if(isset($zoekw)) {echo $zoekw; } ?>">
+                 </span>
+                 <input type="hidden" id="achternaam" name="achternaam" value="<? if(isset($zoekw)) {echo $zoekw; } ?>">
                 </div><!-- /controls -->
           </div><!--  /control-group -->
           <div class="control-group"><!-- control-group -->

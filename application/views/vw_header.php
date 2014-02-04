@@ -53,7 +53,21 @@
 						</ul>
 			 	
 			 	</li>
-			 	<li class=""><a href="<?PHP echo base_url();?>index.php/rapportage"><i class="icon-eur wit"></i> Rapportages</span></a> </li>	
+			 	<li class="dropdown">
+			 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-folder-open wit"></i> 
+							Rapportages
+							<b class="caret wit"></b>
+						</a>
+						
+						<ul class="dropdown-menu">
+							<li> <a href="<?PHP echo base_url();?>index.php/rapportage">Rapportage selectie</a></li>
+							<li> <a href="<?PHP echo base_url();?>index.php/rapportage/jaarrapportage">Jaar overzicht gebruiker</a></li>
+							<li> <a href="<?PHP echo base_url();?>index.php/rapportage/jaarrapportage_nbp">Jaar overzicht toets</a></li>
+						</ul>
+			 	
+			 	</li>
+			 		
 			 </ul>
 			<div class="nav-collapse collapse">
 				<ul class="nav pull-right">

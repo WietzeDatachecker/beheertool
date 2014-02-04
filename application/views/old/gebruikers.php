@@ -264,7 +264,7 @@ function insert_gebruikerwalter() {
         }
   }
 
-function haalgebruikersgegevens($gebr_id, $saldosucces, $wwsucces, $edtsucces, $ophsucces){
+function haalgebruikersgegevens($gebr_id, $saldosucces, $wwsucces, $edtsucces){
    if($this->session->userdata('logged_in'))
     {
       $this->load->model('mod_moneybird','',TRUE);
@@ -277,12 +277,8 @@ function haalgebruikersgegevens($gebr_id, $saldosucces, $wwsucces, $edtsucces, $
             'id' => $gebr_id,
             'saldosucces' => $saldosucces,
             'wwsucces' => $wwsucces,
-            'edtsucces' => $edtsucces,
-            'ophsucces' => $ophsucces
+            'edtsucces' => $edtsucces
             );
-
-      print_r ($arrgebr);
-
       $this->load->model('mod_sql', '', $data);
       $this->load->view('vw_header', $data);
       $this->load->view('gebruikers/vw_editgebruiker', $arrgebr);
@@ -376,7 +372,7 @@ function insert_saldo() {
 
           }
           //$this->haalgebruikersgegevens($this->input->post('saldo_userid'),true,false);
-          redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('saldo_userid').'/true/false/false/false', 'refresh'); 
+          redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('saldo_userid').'/true/false/false', 'refresh'); 
         }
 
 
@@ -399,7 +395,7 @@ function insert_saldo() {
           $retbool = $this->mod_saldo->updatesaldowalter();
 
           //$this->haalgebruikersgegevens($this->input->post('saldo_userid'),true,false);
-          redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('saldo_userid').'/false/false/false/true', 'refresh'); 
+          redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('saldo_userid').'/true/false/false', 'refresh'); 
         }
 
 
@@ -411,7 +407,7 @@ function insert_saldo() {
        $this->load->model('mod_wachtwoord');
        $resbool = $this->mod_wachtwoord->resetwachtwoord();
 
-       redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('ww_userid').'/false/true/false/false', 'refresh'); 
+       redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('ww_userid').'/false/true/false', 'refresh'); 
 
 
 
@@ -424,7 +420,7 @@ function insert_saldo() {
 
     if($resbool == 'true') 
     {
-      redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('uid').'/false/false/true/false', 'refresh'); 
+      redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('uid').'/false/false/true', 'refresh'); 
     }
   }
 
@@ -445,7 +441,7 @@ function insert_saldo() {
           
           if($retbool == 'true') {
             //Insertgelukt en redirect
-            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('opmerking_userid').'/false/false/false/false'.$retbool, 'refresh');
+            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('opmerking_userid').'/false/false/false'.$retbool, 'refresh');
           }
 
            
@@ -461,7 +457,7 @@ function insert_saldo() {
      
          if($this->form_validation->run() == FALSE)
         {
-           redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false/false'.$retbool, 'refresh');
+           redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false'.$retbool, 'refresh');
         } else {
          //Even de opmerking inserten
           $this->load->model('mod_blokeer');
@@ -469,7 +465,7 @@ function insert_saldo() {
           
           if($retbool == 'true') {
             //Insertgelukt en redirect
-            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false/false'.$retbool, 'refresh');
+            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false'.$retbool, 'refresh');
           }
 
          }  
@@ -485,7 +481,7 @@ function insert_saldo() {
      
          if($this->form_validation->run() == FALSE)
         {
-           redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false/false'.$retbool, 'refresh');
+           redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false'.$retbool, 'refresh');
         } else {
          //Even de opmerking inserten
           $this->load->model('mod_blokeer');
@@ -493,7 +489,7 @@ function insert_saldo() {
           
           if($retbool == 'true') {
             //Insertgelukt en redirect
-            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false/false'.$retbool, 'refresh');
+            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('blokeer_userid').'/false/false/false'.$retbool, 'refresh');
           }
 
          }  
@@ -512,7 +508,7 @@ function insert_saldo() {
          //echo $retbool; 
           if($retbool == 'true') {
             //Insertgelukt en redirect
-            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('actie_userid').'/false/false/false/false'.$retbool, 'refresh');
+            redirect('gebruikers/haalgebruikersgegevens/'.$this->input->post('actie_userid').'/false/false/false'.$retbool, 'refresh');
             } 
 
           

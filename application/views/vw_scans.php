@@ -4,7 +4,7 @@
 ?>
 
 
-<h2>Laatste 10 scans</h2>
+<h2>Laatste 15 scans</h2>
 <div class="well">
                 <table class="table">
                     <thead>
